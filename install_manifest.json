@@ -1,0 +1,97 @@
+{
+  "workflow": "Vicii_Influencer_Hyperrealism_v02.json",
+  "custom_nodes": [
+    {
+      "name": "ComfyUI-Spectrum-MOSS",
+      "repo": "https://github.com/Rkkss/ComfyUI-Spectrum-MOSS",
+      "node_types": ["SpectrumMOSSImageManual"]
+    },
+    {
+      "name": "ComfyUI-MOSSImageTextEncoder",
+      "repo": "https://github.com/ThetaCursed/ComfyUI-MOSSImageTextEncoder",
+      "node_types": ["TextEncodeMOSSImageVision"]
+    },
+    {
+      "name": "ComfyUI-KJNodes",
+      "repo": "https://github.com/kijai/ComfyUI-KJNodes",
+      "node_types": ["ModelPreviewOverrideKJ", "PathchSageAttentionKJ"]
+    },
+    {
+      "name": "rgthree-comfy",
+      "repo": "https://github.com/rgthree/rgthree-comfy",
+      "node_types": ["Fast Groups Bypasser (rgthree)"]
+    }
+  ],
+  "models": [
+    {
+      "file": "kromoss_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "pipeline": "A",
+      "size": 5413698958,
+      "url": "https://huggingface.co/lodestones/Kromoss/resolve/main/diffusion_models/kromoss_int8_convrot.safetensors"
+    },
+    {
+      "file": "qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors",
+      "folder": "text_encoders",
+      "pipeline": "A",
+      "size": 5428937108,
+      "url": "https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/text_encoders/qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors"
+    },
+    {
+      "file": "moss_image_vae_bf16.safetensors",
+      "folder": "vae",
+      "pipeline": "A",
+      "size": 124774710,
+      "url": "https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/vae/moss_image_vae_bf16.safetensors"
+    },
+    {
+      "file": "TAE_Flux2_AcademiaSD.safetensors",
+      "folder": "vae_approx",
+      "pipeline": "A",
+      "size": 3333534,
+      "url": "https://huggingface.co/AcademiaSD/TAE_Flux2_AcademiaSD/resolve/main/TAE_Flux2_AcademiaSD.safetensors"
+    },
+    {
+      "file": "qwen_image_2.1_int8_convrot.safetensors",
+      "folder": "diffusion_models",
+      "pipeline": "B",
+      "size": 7256783064,
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors"
+    },
+    {
+      "file": "qwen3vl_8b_int8_convrot.safetensors",
+      "folder": "text_encoders",
+      "pipeline": "B",
+      "size": 9350798360,
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors"
+    },
+    {
+      "file": "qwen_image_2.1_vae_bf16.safetensors",
+      "folder": "vae",
+      "pipeline": "B",
+      "size": 675509688,
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors"
+    },
+    {
+      "file": "bfs_head_v1.1_qwen_2.1.safetensors",
+      "folder": "loras",
+      "pipeline": "B",
+      "size": 260096144,
+      "url": "https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_qwen_2.1.safetensors"
+    },
+    {
+      "file": "p_qwen_image_2.1_8step_v0.1.safetensors",
+      "folder": "loras",
+      "pipeline": "B",
+      "size": 335633936,
+      "url": "https://huggingface.co/RunningHubAI/rh-p-qwen-image-2.1-8step-v0.1-comfyui-t8-lora/resolve/main/p_qwen_image_2.1_8step_v0.1-comfyui-T8.safetensors"
+    },
+    {
+      "file": "taeqi2_1_decoder.pth",
+      "folder": "vae_approx",
+      "pipeline": "B",
+      "size": 15314938,
+      "url": "https://github.com/madebyollin/taesd/raw/main/taeqi2_1_decoder.pth"
+    }
+  ]
+}

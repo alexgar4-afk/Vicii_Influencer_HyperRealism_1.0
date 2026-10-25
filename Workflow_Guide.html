@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Influencer Hyperrealism Guide</title>
+<meta name="description" content="Visual guide to Vicii Influencer Hyperrealism v02: two switchable pipelines for generating and editing iPhone-style photos in ComfyUI.">
+<style>
+  :root {
+    --bg: #f6f5f1; --surface: #ffffff; --ink: #1c1c1e; --muted: #5d6168; --line: #e2dfd8; --code: #f0eee8;
+    --a: #23845a; --a-soft: #e2f2e9;
+    --b: #a3367a; --b-soft: #f6e4ef;
+    --warn: #b4531a; --warn-soft: #fbeadf;
+    --radius: 14px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111214; --surface: #1a1b1e; --ink: #ececee; --muted: #a2a6ad; --line: #2d2f33; --code: #23252a;
+      --a: #5fcf95; --a-soft: #16302a; --b: #e683bf; --b-soft: #35182b;
+      --warn: #f0a070; --warn-soft: #3a2316;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111214; --surface: #1a1b1e; --ink: #ececee; --muted: #a2a6ad; --line: #2d2f33; --code: #23252a;
+    --a: #5fcf95; --a-soft: #16302a; --b: #e683bf; --b-soft: #35182b;
+    --warn: #f0a070; --warn-soft: #3a2316;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px 64px; }
+  a { color: inherit; }
+  code, .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace; font-size: .88em; }
+  code { background: var(--code); padding: .1em .35em; border-radius: 5px; overflow-wrap: anywhere; }
+  h1, h2, h3 { line-height: 1.2; margin: 0; }
+  h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin-bottom: .4rem; }
+  h3 { font-size: 1.08rem; margin-bottom: .35rem; }
+  p { margin: .4rem 0 .8rem; }
+  .muted { color: var(--muted); }
+  section { margin-top: 56px; }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; }
+
+  /* header */
+  header { padding: 48px 0 8px; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 700; color: var(--muted); }
+  header h1 { font-size: clamp(2rem, 6vw, 3.1rem); letter-spacing: -.02em; margin: .3rem 0 .6rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-weight: 600; font-size: .92rem; border: 1px solid var(--line); background: var(--surface); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+  .A { --p: var(--a); --p-soft: var(--a-soft); }
+  .B { --p: var(--b); --p-soft: var(--b-soft); }
+  .dot { background: var(--p); }
+  .tag { display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 7px; background: var(--p); color: var(--bg); font-weight: 800; font-size: .85rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: minmax(0, 1fr); } }
+
+  /* big-picture flow */
+  .lane { display: grid; grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1.25fr) 36px minmax(0, 1fr); align-items: stretch; }
+  .lane + .link { margin: 6px 0; }
+  .box { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 14px; font-size: .93rem; }
+  .box small { display: block; color: var(--muted); font-size: .82rem; margin-top: 2px; }
+  .box.proc { border: 2px solid var(--p); background: var(--p-soft); }
+  .box.proc b { color: var(--p); }
+  .box.out { border-style: dashed; }
+  .stack { display: grid; gap: 8px; }
+  .arrow { display: grid; place-items: center; color: var(--muted); font-size: 1.3rem; }
+  .arrow::before { content: "→"; }
+  .link { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .88rem; padding-left: 8px; }
+  .link::before { content: "↓"; font-size: 1.2rem; }
+  @media (max-width: 760px) {
+    .lane { grid-template-columns: minmax(0, 1fr); }
+    .arrow { padding: 2px 0; }
+    .arrow::before { content: "↓"; }
+  }
+
+  /* toggle panel mock */
+  .panel { background: #2a363b; color: #e9eef0; border-radius: 12px; padding: 14px; font-size: .9rem; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+  .panel .ttl { font-weight: 700; margin-bottom: 10px; opacity: .9; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 10px; border-radius: 8px; background: rgba(255,255,255,.06); margin-top: 6px; }
+  .row span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sw { width: 34px; height: 18px; border-radius: 999px; background: #57646a; position: relative; flex: none; }
+  .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left .15s; }
+  .sw.on { background: #4fae7f; }
+  .sw.on::after { left: 18px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  td.c { text-align: center; }
+  .tbl { overflow-x: auto; }
+  .on-i, .off-i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; }
+  .on-i { background: var(--p); }
+  .off-i { border: 2px solid var(--line); }
+
+  .callout { border-left: 4px solid var(--warn); background: var(--warn-soft); border-radius: 0 10px 10px 0; padding: 12px 14px; margin: 14px 0; font-size: .95rem; }
+  .callout.tip { border-color: var(--p, var(--a)); background: var(--p-soft, var(--a-soft)); }
+
+  /* pipeline section header */
+  .phead { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .phead .tag { min-width: 36px; height: 36px; font-size: 1.1rem; border-radius: 10px; }
+
+  /* prompt formula */
+  .formula { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 6px; margin: 12px 0; }
+  .seg { border-radius: 10px; padding: 10px 12px; font-size: .88rem; border: 1px solid var(--line); background: var(--code); }
+  .seg b { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 2px; }
+  .seg.you { background: var(--p-soft); border: 2px solid var(--p); }
+  .seg.you b { color: var(--p); }
+  @media (max-width: 640px) { .formula { grid-template-columns: minmax(0, 1fr); } }
+
+  /* images */
+  figure { margin: 0; }
+  .shot { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--code); aspect-ratio: 1088 / 1920; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+  .shot:hover img { transform: scale(1.02); }
+  figcaption { font-size: .88rem; color: var(--muted); margin-top: 8px; }
+  figcaption b { color: var(--ink); }
+  .pair { display: grid; grid-template-columns: minmax(0,1fr) 44px minmax(0,1fr); align-items: center; gap: 4px; max-width: 760px; }
+  .pair .mid { display: grid; place-items: center; font-size: 1.6rem; color: var(--p); font-weight: 800; }
+  .duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 760px; }
+  @media (max-width: 520px) {
+    .pair { grid-template-columns: minmax(0, 1fr); }
+    .pair .mid { transform: rotate(90deg); }
+  }
+
+  /* face swap: base + face = result */
+  .swap { display: grid; grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); align-items: center; gap: 4px; }
+  .swap .op { display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; color: var(--p); }
+  .shot.r45 { aspect-ratio: 1017 / 1272; }
+  .from { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+  .from .card h3 { display: flex; align-items: center; gap: 8px; }
+  .warn-word { background: var(--warn-soft); box-shadow: inset 0 -2px 0 var(--warn); border-radius: 4px; padding: 1px 2px; color: var(--ink); }
+  .kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: .92rem; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; }
+  @media (max-width: 760px) {
+    .swap { grid-template-columns: minmax(0, 1fr); max-width: 360px; margin: 0 auto; }
+    .from { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* prompt anatomy */
+  .prompt { background: var(--code); border-radius: 12px; padding: 16px; font-size: .9rem; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .lock { color: var(--muted); }
+  .edit { background: var(--p-soft); box-shadow: inset 0 -2px 0 var(--p); border-radius: 4px; padding: 1px 2px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: .86rem; color: var(--muted); margin-top: 10px; }
+  .legend i { display: inline-block; width: 22px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+
+  ol.steps { padding-left: 1.2rem; margin: .4rem 0; }
+  ol.steps li { margin: .35rem 0; }
+  ul.tight { padding-left: 1.1rem; margin: .4rem 0; }
+  ul.tight li { margin: .3rem 0; }
+
+  footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComfyUI workflow guide</div>
+  <h1>Vicii Influencer Hyperrealism · v02</h1>
+  <p class="lede">One workflow, two pipelines you switch on and off: <b>generate</b> a realistic iPhone-style photo, then <b>change its pose and expression</b>.</p>
+  <div class="chips">
+    <span class="chip A"><span class="dot"></span>A · Kromoss generator</span>
+    <span class="chip B"><span class="dot"></span>B · Pose + expression edit</span>
+  </div>
+</header>
+
+<!-- BIG PICTURE -->
+<section id="overview">
+  <h2>The big picture</h2>
+  <p class="muted">Each lane is one pipeline. Files: <code>Vicii_Influencer_Hyperrealism_v02.json</code> on the canvas, results in <code>output/</code>.</p>
+
+  <div class="card">
+    <div class="lane A">
+      <div class="box">Reference photo (recommended) + your text<small>REFERENCE switch, STYLE switch</small></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box proc"><b>A · Kromoss generator</b><small>MOSS-Image finetune · 50 steps · Spectrum ≈2.2× faster · Vision Encode reads the reference</small></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box out">New iPhone-style photo<small>output/kromoss/</small></div>
+    </div>
+
+    <div class="link">Optional: save A's photo and load it into B as Image 1 (manual hand-off)</div>
+
+    <div class="lane B">
+      <div class="stack">
+        <div class="box">Image 1 · photo to edit<small>body, scene, light, outfit</small></div>
+        <div class="box">Image 2 · face source<small>same photo = keep her face</small></div>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box proc"><b>B · Qwen Image 2.1 + BFS LoRA</b><small>Training caption + your new expression &amp; pose sentences · size matches Image 1</small></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box out">New pose + expression<small>output/qwen-2.1/bfs-pose-expr_*</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOGGLES -->
+<section id="toggles">
+  <h2>Switch pipelines on and off</h2>
+  <p class="lede">The <b>🎛️ PIPELINE TOGGLES</b> panel sits at the top-left of the canvas. Off bypasses every node in that pipeline; the arrow on each row jumps to it.</p>
+
+  <div class="grid2" style="align-items:start">
+    <div class="panel" role="img" aria-label="Toggle panel example: A off, B on">
+      <div class="ttl">🎛️ PIPELINE TOGGLES: on = runs · off = bypassed</div>
+      <div class="row"><span>Enable PIPELINE A · Kromoss iPhone generator</span><span class="sw"></span></div>
+      <div class="row"><span>Enable PIPELINE B · Qwen 2.1 BFS head swap</span><span class="sw on"></span></div>
+    </div>
+
+    <div class="card tbl">
+      <table>
+        <thead><tr><th>I want to…</th><th class="A">A</th><th>B</th></tr></thead>
+        <tbody>
+          <tr><td>Generate a new photo</td><td class="c A"><i class="on-i" title="on"></i></td><td class="c"><i class="off-i" title="off"></i></td></tr>
+          <tr><td>Change pose / expression (or swap a face)</td><td class="c"><i class="off-i" title="off"></i></td><td class="c B"><i class="on-i" title="on"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout"><b>A switch flips every node.</b> A node you bypassed by hand (e.g. Spectrum) comes back on when you re-enable its pipeline.</div>
+</section>
+
+<!-- PIPELINE A -->
+<section id="a" class="A">
+  <div class="phead"><span class="tag">A</span><h2>Generate an iPhone-style photo</h2></div>
+  <p class="lede">You write only the middle of the prompt. The 🔧 Prompt Builder wraps it in the opener and closing block of the style you pick.</p>
+
+  <div class="formula">
+    <div class="seg"><b>Opener + beauty clause</b>added for you</div>
+    <div class="seg you"><b>Your subject &amp; scene</b>start with her hair</div>
+    <div class="seg"><b>Closing block</b>added for you</div>
+  </div>
+
+  <div class="grid2" style="align-items:start">
+    <div>
+      <ol class="steps">
+        <li>Flip <b>🎛️ STYLE</b> in group ③: <b>ON</b> = 📱 Modern iPhone, <b>OFF</b> = 📼 Cheap phone.</li>
+        <li>Set the <b>🖼️ REFERENCE</b> switch and load a photo into <b>🖼️ REFERENCE IMAGE</b> (see below).</li>
+        <li>Write your prompt in the big <b>✏️</b> box. Cheap phone also uses the <b>🏷️ Scene word</b>.</li>
+        <li>Pick a size in <b>Resolution Selector</b> and run. About 80 s per image on an RTX 3090.</li>
+      </ol>
+      <div class="grid2" style="margin-top:12px">
+        <div class="card" style="border:2px solid var(--a)"><h3>🖼️ Reference ON <span class="muted" style="font-weight:400">· recommended</span></h3><p class="muted" style="margin:0">The photo's outfit, hair, jewelry, light and setting are encoded <b>straight into the conditioning</b> by Qwen3.5's vision tower. You don't need an LLM to extract a prompt first. Write only what should change: <code>wearing a camo cap, doing the middle finger</code>.</p></div>
+        <div class="card"><h3>⬜ Reference OFF</h3><p class="muted" style="margin:0">Text only, nothing from a photo. Write a <b>full, detailed prompt</b>: hair, face, body, outfit, pose, setting, lighting, framing. A short prompt here gives a generic result.</p></div>
+      </div>
+    </div>
+    <div>
+      <h3>Same prompt, same seed: only STYLE flipped</h3>
+      <div class="duo">
+        <figure>
+          <a class="shot" href="Example%20Images/style%20comparison/auto_modern_00001_.png" target="_blank" rel="noopener"><img src="Example%20Images/style%20comparison/auto_modern_00001_.png" alt="Modern iPhone style: crisp, clean HDR beach photo" loading="lazy"></a>
+          <figcaption><b>📱 Modern (ON)</b><br>Crisp, Smart-HDR, clean.</figcaption>
+        </figure>
+        <figure>
+          <a class="shot" href="Example%20Images/style%20comparison/auto_cheap_00001_.png" target="_blank" rel="noopener"><img src="Example%20Images/style%20comparison/auto_cheap_00001_.png" alt="Cheap phone style: grainy, softer version of the same beach photo" loading="lazy"></a>
+          <figcaption><b>📼 Cheap phone (OFF)</b><br>Heavy grain, motion softness.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE B -->
+<section id="b" class="B">
+  <div class="phead"><span class="tag">B</span><h2>Change the pose and expression</h2></div>
+  <p class="lede">Qwen Image 2.1 with the <b>BFS head-swap LoRA</b> rebuilds the person from Image 1 with the head from Image 2, then follows your new expression and pose. Use the same photo for both to keep her face; that's how you get extra carousel slides of one shot. A different face in Image 2 is a <a href="#faceswap">face swap</a>.</p>
+
+  <div class="pair">
+    <figure>
+      <a class="shot" href="Example%20Images/Carrousel-generator/01_moss_original_.png" target="_blank" rel="noopener"><img src="Example%20Images/Carrousel-generator/01_moss_original_.png" alt="Pipeline A output: woman in a camo cap at a ramen restaurant, pouting, hand raised" loading="lazy"></a>
+      <figcaption><b>Image 1 (and 2)</b> · Pipeline A output</figcaption>
+    </figure>
+    <div class="mid" aria-hidden="true">→</div>
+    <figure>
+      <a class="shot" href="Example%20Images/Carrousel-generator/01_qwen_edit_.png" target="_blank" rel="noopener"><img src="Example%20Images/Carrousel-generator/01_qwen_edit_.png" alt="Pipeline B output: same woman and scene, now laughing with her hand over her mouth" loading="lazy"></a>
+      <figcaption><b>Pipeline B output</b> · laughing, hand over mouth; same face, outfit and scene</figcaption>
+    </figure>
+  </div>
+
+  <h3 style="margin-top:28px">Anatomy of the prompt</h3>
+  <p class="muted">The LoRA was trained on one single caption. Keep it word for word and only edit the two sentences after it.</p>
+  <div class="prompt mono"><span class="lock">head_swap: start with &lt;image1&gt; as the base image, keeping its lighting, environment, and background, her outfit, the camo cap on her head and the ramen bowl on the table. remove the head from &lt;image1&gt; completely and replace it with the head from &lt;image2&gt;, strictly preserving the hair, eye color, nose structure from &lt;image2&gt;.</span> <span class="edit">change the facial expression: she is laughing hard in a genuine burst of laughter, eyes squeezed almost shut into happy crescents, cheeks pushed up, eyebrows lifted, no pursed lips.</span> <span class="edit">change the pose: the hand raising the middle finger moves to her face and covers her mouth and chin as she laughs, palm toward her face, fingers relaxed and slightly spread, her eyes, nose and cheeks stay visible above the hand; her head tips slightly forward and to one side, face still turned toward the camera; the other hand keeps holding the chopsticks with noodles above the bowl.</span> <span class="lock">the face stays the same size and position in the frame, skin texture and lighting on the face and hand matching the scene, natural hand with five fingers, high quality, sharp details, 4k</span></div>
+  <div class="legend"><span><i style="background:var(--code);border:1px solid var(--line)"></i>keep as is (training caption + quality tail)</span><span><i style="background:var(--b-soft);box-shadow:inset 0 -2px 0 var(--b)"></i>edit these for each new shot</span></div>
+
+  <div class="grid3" style="margin-top:20px">
+    <div class="card"><h3>✋ Hands off eyes &amp; nose</h3><p class="muted" style="margin:0">A hand over the mouth or chin works. Across the eyes or nose is where the swap breaks.</p></div>
+    <div class="card"><h3>🎲 Old expression bleeds through?</h3><p class="muted" style="margin:0">BFS normally copies the expression from Image 1. The prompt overrides it; try another seed.</p></div>
+    <div class="card"><h3>📐 Size switch OFF</h3><p class="muted" style="margin:0">Default: match Image 1's size so the head stays in place. Image 3 is unwired on purpose.</p></div>
+  </div>
+</section>
+
+<!-- FACE SWAP -->
+<section id="faceswap" class="B">
+  <div class="phead"><span class="tag">B</span><h2>Face swap: put your character into any shot</h2></div>
+  <p class="lede">Same Pipeline B, but now <b>Image 2 is a different person</b>. The BFS LoRA removes the head from Image 1 and rebuilds it from Image 2, while the body, outfit, pose, hands and scene stay exactly as they were.</p>
+
+  <div class="swap">
+    <figure>
+      <a class="shot" href="Example%20Images/Face-swap/original_moss_image.png" target="_blank" rel="noopener"><img src="Example%20Images/Face-swap/original_moss_image.png" alt="Base image: Pipeline A photo of a woman in a camo cap at a ramen restaurant, pouting and raising her middle finger" loading="lazy"></a>
+      <figcaption><b>Image 1 · base</b><br>Pipeline A output: scene, body, outfit, pose.</figcaption>
+    </figure>
+    <div class="op" aria-hidden="true">+</div>
+    <figure>
+      <a class="shot r45" href="Example%20Images/Face-swap/face_reference.png" target="_blank" rel="noopener"><img src="Example%20Images/Face-swap/face_reference.png" alt="Face reference: AI character with green-and-black hair, freckles and a septum ring at a rooftop pool" loading="lazy"></a>
+      <figcaption><b>Image 2 · face reference</b><br>An AI character (Krea2 + character LoRA). Clear, front-facing, well lit.</figcaption>
+    </figure>
+    <div class="op" aria-hidden="true">=</div>
+    <figure>
+      <a class="shot" href="Example%20Images/Face-swap/face_swapped_result.png" target="_blank" rel="noopener"><img src="Example%20Images/Face-swap/face_swapped_result.png" alt="Result: the character's face and green hair on the ramen-restaurant photo, same pose, cap and outfit" loading="lazy"></a>
+      <figcaption><b>Result</b> · Pipeline B output<br>Her face and figure in the original shot.</figcaption>
+    </figure>
+  </div>
+
+  <div class="from">
+    <div class="card"><h3><span class="tag">1</span>Kept from Image 1</h3>
+      <ul class="tight">
+        <li>Scene, lighting, background, framing</li>
+        <li>Outfit, necklace, camo cap, arms and posture</li>
+        <li>Hands and gesture (middle finger, chopsticks)</li>
+        <li>Head angle, eye direction and expression (the duck face)</li>
+      </ul>
+    </div>
+    <div class="card"><h3><span class="tag">2</span>Taken from Image 2</h3>
+      <ul class="tight">
+        <li>Face identity and bone structure</li>
+        <li>Hair: the green-and-black bangs, now under the cap</li>
+        <li>Eye color, nose structure, freckles</li>
+        <li>Facial piercings (the septum ring)</li>
+        <li>Bust size, from the extra <i>"Also give…"</i> sentence</li>
+      </ul>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:12px">Look closely and you'll see Image 1's long brown hair still falling behind her shoulder. Hair outside the head area can survive the swap; bases with a similar hair length swap cleanest.</p>
+
+  <h3 style="margin-top:28px">The prompt used for this result</h3>
+  <p class="muted">The LoRA's training caption, word for word, with three things written for this shot: what to keep from Image 1, a body trait to take from Image 2, and which expression to keep.</p>
+  <div class="prompt mono"><span class="lock">head_swap: start with &lt;image1&gt; as the base image, keeping its lighting, environment, and background,</span> <span class="edit">her outfit, the camo cap on her head and the ramen bowl on the table.</span> <span class="lock">remove the head from &lt;image1&gt; completely and replace it with the head from &lt;image2&gt;, strictly preserving the hair, eye color, nose structure from &lt;image2&gt;.</span> <span class="edit">Also give &lt;image1&gt; the large round breasts from &lt;image2&gt;</span> <span class="edit">keep the duck face facial expression,</span> <span class="lock">the face stays the same size and position in the frame, skin texture and lighting on the face and hand matching the scene, natural hand with five fingers, high quality, sharp details, 4k</span></div>
+  <div class="legend"><span><i style="background:var(--code);border:1px solid var(--line)"></i>training caption + quality tail: keep</span><span><i style="background:var(--b-soft);box-shadow:inset 0 -2px 0 var(--b)"></i>written for this shot</span></div>
+
+  <div class="grid2" style="margin-top:20px;align-items:start">
+    <div class="card">
+      <h3>Why each part is there</h3>
+      <ul class="tight">
+        <li><b><code>head_swap:</code></b> opens the one caption the LoRA was trained on. Keeping its wording is what the LoRA recognizes.</li>
+        <li><b>"keeping its lighting… and background, her outfit, the camo cap…"</b> lists everything in Image 1 that must survive. Name the items that touch the head (hats, glasses, earrings) or they may be swapped away.</li>
+        <li><b>"remove the head from &lt;image1&gt;… replace it with the head from &lt;image2&gt;"</b> sets the direction: Image 1 is the body, Image 2 is the face. Swap the images and you swap who's who.</li>
+        <li><b>"Also give &lt;image1&gt; the large round breasts from &lt;image2&gt;"</b> reaches past the head. BFS only swaps heads, so this part is Qwen 2.1's own editing following the instruction. It can carry a body trait over from Image 2, but it's less locked-down than the head swap: name the exact trait you want moved.</li>
+        <li><b>"keep the duck face facial expression"</b> takes the place of the caption's <code>copy the direction of the eye, head rotation, micro expressions from &lt;image1&gt;</code>. Either works for keeping the pose; to change the expression instead, use the <code>change the facial expression:</code> sentence from the section above.</li>
+        <li><b>The quality tail</b> keeps the head at the same size and spot, and matches skin and light to the scene so the face doesn't look pasted on.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Pipeline B settings</h3>
+        <dl class="kv">
+          <dt>Model</dt><dd>Qwen Image 2.1 INT8 + Qwen3-VL 8B</dd>
+          <dt>LoRAs</dt><dd>BFS head v1.1 @ 0.9 · 8-step @ 1.0</dd>
+          <dt>Sampler</dt><dd>20 steps · CFG 3 · res_multistep / sgm_uniform</dd>
+          <dt>Seed</dt><dd>43 (fixed)</dd>
+          <dt>Size</dt><dd>Switch OFF: matches Image 1 (1088 × 1920)</dd>
+        </dl>
+      </div>
+      <h3 style="margin-top:18px">B's default negative prompt</h3>
+      <div class="prompt mono" style="font-size:.84rem">airbrushed skin, plastic skin, pasted-on cutout, sticker edge, white halo, dark halo, visible seam at the neck, mismatched skin tone between face and neck, floating feet, missing contact shadow, detached shadow, mismatched perspective, mismatched scale, studio lighting, dramatic rim light, beauty lighting, <span class="warn-word">excessive cleavage</span>, transparent clothing, oversharpened subject, clean digital subject against a noisy background, <span class="warn-word">pursed lips, kissy face, duck face, middle finger</span>, hand covering eyes, hand covering nose, extra limbs, deformed hands, extra fingers, fused fingers, duplicate person, <span class="warn-word">altered body proportions</span>, artificial pose, inconsistent motion blur</div>
+      <div class="callout" style="margin-top:10px"><b>Watch the negative:</b> the highlighted words fight this prompt. "Duck face, pursed lips, middle finger" work against keeping the pout and gesture, and "excessive cleavage, altered body proportions" work against the bust change. <b>Delete from the negative anything the positive asks for.</b></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Do it yourself</h3>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Toggles:</b> A off, B on.</li>
+      <li><b>Image 1:</b> the shot you want: body, outfit, pose, place.</li>
+      <li><b>Image 2:</b> the face you want. Large, sharp, roughly front-facing, evenly lit, nothing over the eyes or nose. Its hair comes along, so pick a hairstyle you're happy with.</li>
+      <li><b>Prompt:</b> keep the caption; in the first sentence, list what to keep from Image 1 (especially hats or glasses); then either keep the expression or change it.</li>
+      <li><b>Negative:</b> remove anything you're asking to keep.</li>
+      <li><b>Run</b> and check the hairline, the neck seam and leftover hair. If it's off, try another seed or a closer head angle between the two images.</li>
+    </ol>
+  </div>
+  <p class="muted" style="margin-top:12px">Only swap faces you have the rights to: your own AI characters, or people who gave consent. Never public figures.</p>
+</section>
+
+<!-- PREVIEW -->
+<section id="preview">
+  <h2>👁️ Watch it render, cancel early</h2>
+  <p class="lede">Every pipeline has a <b>LIVE PREVIEW</b> group (KJNodes Model Preview Override). By about 30% of the steps, face, pose and framing are readable; press <b>✕</b> next to Run if it's going wrong.</p>
+  <div class="grid2">
+    <div class="card A"><h3><span class="tag">A</span> &nbsp;FLUX.2 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = TAE_Flux2_AcademiaSD</p></div>
+    <div class="card B"><h3><span class="tag">B</span> &nbsp;Qwen 2.1 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = <b>none</b> on purpose: ComfyUI loads <code>taeqi2_1_decoder.pth</code> itself. Needs preview method <b>TAESD</b>.</p></div>
+  </div>
+</section>
+
+<!-- CAROUSEL RECIPE -->
+<section id="carousel">
+  <h2>Recipe: a carousel from one shot</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><span class="tag" style="--p:var(--a)">A</span> &nbsp;Generate the hero shot (A on, B off). That's slide 1.</li>
+      <li><span class="tag" style="--p:var(--b)">B</span> &nbsp;Load it as <b>Image 1 and Image 2</b>, turn A off and B on, and write a new expression and pose. Each prompt is another slide with the same girl in the same place.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install">
+  <h2>What you need installed</h2>
+  <p class="muted">Start ComfyUI, then double-click <code>install.bat</code> (or run <code>python install.py</code>): it installs every missing node pack and model below. Download links, folders and licenses are in <code>README.md</code> and the in-workflow <b>⬇️ DOWNLOADS</b> note.</p>
+  <div class="grid2" style="align-items:start">
+    <div class="card">
+      <h3>Custom nodes (4)</h3>
+      <ul class="tight">
+        <li><b>ComfyUI-Spectrum-MOSS</b>: A speed-up</li>
+        <li><b>ComfyUI-MOSSImageTextEncoder</b>: A Vision Encode</li>
+        <li><b>ComfyUI-KJNodes</b>: live preview, B's Sage Attention patch</li>
+        <li><b>rgthree-comfy</b>: the toggle panel</li>
+      </ul>
+      <p class="muted" style="margin:0">Plus ComfyUI 0.42.1+ with native MOSS-Image and Qwen Image 2.1. Tested on an RTX 3090 (24 GB).</p>
+    </div>
+    <div class="card tbl">
+      <h3>Models (~29 GB)</h3>
+      <table>
+        <tbody>
+          <tr class="A"><td><span class="tag">A</span></td><td>Kromoss UNET 5.4 GB · MOSS text encoder 5.4 GB · MOSS VAE 125 MB · FLUX.2 preview TAE 3 MB</td></tr>
+          <tr class="B"><td><span class="tag">B</span></td><td>Qwen Image 2.1 INT8 7.3 GB · Qwen3-VL 8B 9.4 GB · VAE 676 MB · BFS LoRA 260 MB · 8-step LoRA 336 MB · Qwen 2.1 preview TAE 15 MB</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TROUBLESHOOTING -->
+<section id="help">
+  <h2>When something's off</h2>
+  <div class="card tbl">
+    <table>
+      <thead><tr><th>You see</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>B's live preview is blurry color blobs</td><td>Put <code>taeqi2_1_decoder.pth</code> in <code>models/vae_approx/</code> and set the live preview method to TAESD.</td></tr>
+        <tr><td>A node you bypassed is active again</td><td>The pipeline switch re-enabled it. Bypass it again.</td></tr>
+        <tr><td>Red loader / "value not in list"</td><td>Re-select the model file in that loader.</td></tr>
+        <tr><td>Burned or neon images (A)</td><td>Remove any ModelSamplingSD3 node; don't use <code>res_multistep_ancestral</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:14px">Face swaps: only use faces of people who have given consent, never public figures.</p>
+</section>
+
+<footer>
+  Vicii Influencer Hyperrealism v02 · <code>Vicii_Influencer_Hyperrealism_v02.json</code> · Example images in <code>Example Images/</code> were made with this workflow.
+</footer>
+
+</div>
+</body>
+</html>

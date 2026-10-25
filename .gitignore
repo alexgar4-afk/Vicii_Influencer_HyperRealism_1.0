@@ -1,0 +1,12 @@
+# Not shipped
+Old_files/
+Vicii_Influencer_Hyperrealism_v01.json
+
+# Python / tooling
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.scratch/
+
+# Interrupted installer downloads
+*.part

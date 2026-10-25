@@ -1,0 +1,4467 @@
+{
+  "id": "2af69202-3529-4282-ba59-872f39fbfe62",
+  "revision": 0,
+  "last_node_id": 225,
+  "last_link_id": 232,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        1255.220278455302,
+        1244
+      ],
+      "size": [
+        400,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "weight_dtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "title": "Kromoss UNET (Load Diffusion Model)",
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "unet_name": true,
+            "weight_dtype": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "kromoss_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "kromoss_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 3,
+      "type": "SpectrumMOSSImageManual",
+      "pos": [
+        1711.220278455302,
+        1244
+      ],
+      "size": [
+        360,
+        330
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "localized_name": "warmup_steps",
+          "name": "warmup_steps",
+          "type": "INT",
+          "widget": {
+            "name": "warmup_steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tail_actual_steps",
+          "name": "tail_actual_steps",
+          "type": "INT",
+          "widget": {
+            "name": "tail_actual_steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "window_size",
+          "name": "window_size",
+          "type": "FLOAT",
+          "widget": {
+            "name": "window_size"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "flex_window",
+          "name": "flex_window",
+          "type": "FLOAT",
+          "widget": {
+            "name": "flex_window"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_consecutive_forecasts",
+          "name": "max_consecutive_forecasts",
+          "type": "INT",
+          "widget": {
+            "name": "max_consecutive_forecasts"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "history_points",
+          "name": "history_points",
+          "type": "INT",
+          "widget": {
+            "name": "history_points"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "chebyshev_degree",
+          "name": "chebyshev_degree",
+          "type": "INT",
+          "widget": {
+            "name": "chebyshev_degree"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "ridge_lambda",
+          "name": "ridge_lambda",
+          "type": "FLOAT",
+          "widget": {
+            "name": "ridge_lambda"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "blend_weight",
+          "name": "blend_weight",
+          "type": "FLOAT",
+          "widget": {
+            "name": "blend_weight"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cache_device",
+          "name": "cache_device",
+          "type": "COMBO",
+          "widget": {
+            "name": "cache_device"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "force_actual_on_control",
+          "name": "force_actual_on_control",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "force_actual_on_control"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "debug",
+          "name": "debug",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "debug"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "title": "Spectrum: 2.2× faster (Ctrl+B to bypass)",
+      "properties": {
+        "Node name for S&R": "SpectrumMOSSImageManual",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "warmup_steps": true,
+            "tail_actual_steps": true,
+            "window_size": true,
+            "flex_window": true,
+            "max_consecutive_forecasts": true,
+            "history_points": true,
+            "chebyshev_degree": true,
+            "ridge_lambda": true,
+            "blend_weight": true,
+            "cache_device": true,
+            "force_actual_on_control": true,
+            "debug": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        8,
+        2,
+        2,
+        0.75,
+        2,
+        8,
+        4,
+        0.1,
+        0.5,
+        "main_device",
+        true,
+        false
+      ],
+      "widgets_values_named": {
+        "warmup_steps": 8,
+        "tail_actual_steps": 2,
+        "window_size": 2,
+        "flex_window": 0.75,
+        "max_consecutive_forecasts": 2,
+        "history_points": 8,
+        "chebyshev_degree": 4,
+        "ridge_lambda": 0.1,
+        "blend_weight": 0.5,
+        "cache_device": "main_device",
+        "force_actual_on_control": true,
+        "debug": false
+      }
+    },
+    {
+      "id": 4,
+      "type": "SkipLayerGuidanceDiTSimple",
+      "pos": [
+        1711.220278455302,
+        1688
+      ],
+      "size": [
+        360,
+        130
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "localized_name": "double_layers",
+          "name": "double_layers",
+          "type": "STRING",
+          "widget": {
+            "name": "double_layers"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "single_layers",
+          "name": "single_layers",
+          "type": "STRING",
+          "widget": {
+            "name": "single_layers"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "start_percent",
+          "name": "start_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "start_percent"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "end_percent",
+          "name": "end_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "end_percent"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "title": "Skip Layer Guidance: layer 22 (official)",
+      "properties": {
+        "Node name for S&R": "SkipLayerGuidanceDiTSimple",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "double_layers": true,
+            "single_layers": true,
+            "start_percent": true,
+            "end_percent": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "22",
+        0,
+        1
+      ],
+      "widgets_values_named": {
+        "double_layers": "",
+        "single_layers": "22",
+        "start_percent": 0,
+        "end_percent": 1
+      }
+    },
+    {
+      "id": 5,
+      "type": "CLIPLoader",
+      "pos": [
+        1255.220278455302,
+        1380
+      ],
+      "size": [
+        400,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip_name",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "type",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "device",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "title": "Text Encoder (type: moss_image)",
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "clip_name": true,
+            "type": true,
+            "device": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors",
+        "moss_image",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors",
+        "type": "moss_image",
+        "device": "default"
+      }
+    },
+    {
+      "id": 6,
+      "type": "VAELoader",
+      "pos": [
+        1255.220278455302,
+        1544
+      ],
+      "size": [
+        400,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "title": "VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "vae_name": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "moss_image_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "moss_image_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 9,
+      "type": "EmptyFlux2LatentImage",
+      "pos": [
+        1255.220278455302,
+        1934
+      ],
+      "size": [
+        220,
+        106
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 12
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 13
+        },
+        {
+          "localized_name": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyFlux2LatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "width": true,
+            "height": true,
+            "batch_size": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        1024,
+        1328,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1328,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 10,
+      "type": "KSampler",
+      "pos": [
+        1255.220278455302,
+        2806
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 60,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 30
+        },
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "localized_name": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 28
+        },
+        {
+          "localized_name": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 8
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "sampler_name",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "scheduler",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "denoise",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "title": "KSampler: 50 steps · CFG 3",
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "seed": true,
+            "steps": true,
+            "cfg": true,
+            "sampler_name": true,
+            "scheduler": true,
+            "denoise": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        713615184596558,
+        "randomize",
+        50,
+        3,
+        "dpmpp_2m_sde",
+        "sgm_uniform",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 713615184596558,
+        "control_after_generate": "randomize",
+        "steps": 50,
+        "cfg": 3,
+        "sampler_name": "dpmpp_2m_sde",
+        "scheduler": "sgm_uniform",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": [
+        1255.220278455302,
+        3118
+      ],
+      "size": [
+        200,
+        46
+      ],
+      "flags": {},
+      "order": 62,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 9
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 12,
+      "type": "SaveImage",
+      "pos": [
+        1575.220278455302,
+        2806
+      ],
+      "size": [
+        420,
+        700
+      ],
+      "flags": {},
+      "order": 64,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "filename_prefix": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "kromoss/kromoss-50step-spectrum"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "kromoss/kromoss-50step-spectrum"
+      }
+    },
+    {
+      "id": 13,
+      "type": "MarkdownNote",
+      "pos": [
+        40,
+        368
+      ],
+      "size": [
+        579.2202784553018,
+        1419.3748493192027
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "📖 START HERE",
+      "properties": {
+        "Node name for S&R": "MarkdownNote",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# 📖 START HERE\n\n**Vicii Influencer Hyperrealism v02: one workflow, two pipelines.** Turn each one on or off in **🎛️ PIPELINE TOGGLES** (top-left). Off = every node in that pipeline is bypassed.\n\n- 🅰️ **A · Kromoss generator:** a new iPhone-style photo from a reference photo (optional, highly recommended) + your text.\n- 🅱️ **B · Qwen 2.1 BFS edit:** a new pose + facial expression on an existing photo (or a face swap).\n\n## 🚀 Recipes\n- **New photo:** A ✅ · B ⬜\n- **New pose / expression:** A ⬜ · B ✅\n\n⚠️ A pipeline switch turns **every** node in it back on, including one you bypassed by hand.\n\n## 🅰️ A · Generate\n1. Install the custom nodes and models in **⬇️ DOWNLOADS** (next note).\n2. Flip **🎛️ STYLE** (ON = 📱 Modern, OFF = 📼 Cheap phone) in group **③ YOUR PROMPT**.\n3. Write your prompt in the big box. The opener, beauty clause and closing block are added automatically.\n4. **🖼️ REFERENCE IMAGE** (bottom left) is *optional but highly recommended*.\n   - Switch **ON**: the photo's outfit, hair, jewelry, light and setting are encoded straight into the conditioning, with no LLM prompt extraction. Write only what should change (pose, clothes).\n   - Switch **OFF**: text only. Write a **full, detailed prompt** (hair, face, outfit, pose, setting, lighting).\n5. Pick a size in **Resolution Selector** and press **Run** (Ctrl+Enter).\n\n## 🅱️ B · Pose + expression\n- **Image 1** = the photo to edit. **Image 2** = whose face ends up in it. Same photo = she keeps her face; another person = face swap.\n- In the prompt, edit **only** the `change the facial expression:` and `change the pose:` sentences. The `head_swap: …` part before them is the LoRA's training caption: leave it as is.\n- Keep hands off the eyes and nose (over the mouth is fine).\n- Saves to `output/qwen-2.1/`.\n\n## 👁️ Live preview\nEvery pipeline has a **👁️ LIVE PREVIEW** group (Model Preview Override). By ~30% of the steps, face, pose and framing are readable: if it looks wrong, press **✕** next to **Run** to cancel. B's preview needs `taeqi2_1_decoder.pth` and the TAESD preview method (see ⬇️ DOWNLOADS).\n\n## ⚙️ How A works\n**① Load Models:** Kromoss UNET (INT8), Qwen3.5-9B text encoder (type `moss_image`) and the MOSS VAE, all with native ComfyUI loaders.\n\n**② Speed + Quality**\n- **Spectrum** predicts ~40% of the model passes from the real ones before them, which makes runs **~2.2× faster with no visible quality loss** (61.7 s → 27.8 s at 1024×1328 on a 3090). Bypass it (select it, then Ctrl+B) to compare.\n- **Skip Layer Guidance** skips layer 22 on the negative pass only. This is Kromoss's official recipe for cleaner structure.\n\n**③ Prompt + reference:** **🖼️ Vision Encode** turns your prompt *and* the reference photo (when its switch is ON) into the conditioning (through Qwen3.5's vision tower, no VAE). Leave its `negative_prompt` empty.\n\n**④ Image Size:** Resolution Selector sends width/height to the latent. Default: 9:16 at 2 MP.\n\n**⑤ Generate:** 50 steps · CFG 3 · `dpmpp_2m_sde` / `sgm_uniform`, then decode, then save to `output/kromoss/`.\n\n## 🛑 Don't\n- **Lower A's steps** below 50. Spectrum needs 8 warm-up + 2 final real steps.\n- **Add ModelSamplingSD3** to A. It breaks native MOSS (wrong timestep multiplier). Shift 5 is already built in; to change it, use **ModelSamplingAuraFlow**.\n- **Use `res_multistep_ancestral`.** It gives neon colors and posterization.\n\n## 🎛️ Sampler tips (A)\n- `dpmpp_2m_sde`: most skin and hair texture (default)\n- `er_sde` / `sa_solver`: natural middle ground\n- `euler`: smoother skin, can look waxy\n- SDE samplers change the composition even with the same seed.\n\n📘 Full guide: **README.md** in the package.\n"
+      ],
+      "widgets_values_named": {
+        "text": "# 📖 START HERE\n\n**Vicii Influencer Hyperrealism v02: one workflow, two pipelines.** Turn each one on or off in **🎛️ PIPELINE TOGGLES** (top-left). Off = every node in that pipeline is bypassed.\n\n- 🅰️ **A · Kromoss generator:** a new iPhone-style photo from a reference photo (optional, highly recommended) + your text.\n- 🅱️ **B · Qwen 2.1 BFS edit:** a new pose + facial expression on an existing photo (or a face swap).\n\n## 🚀 Recipes\n- **New photo:** A ✅ · B ⬜\n- **New pose / expression:** A ⬜ · B ✅\n\n⚠️ A pipeline switch turns **every** node in it back on, including one you bypassed by hand.\n\n## 🅰️ A · Generate\n1. Install the custom nodes and models in **⬇️ DOWNLOADS** (next note).\n2. Flip **🎛️ STYLE** (ON = 📱 Modern, OFF = 📼 Cheap phone) in group **③ YOUR PROMPT**.\n3. Write your prompt in the big box. The opener, beauty clause and closing block are added automatically.\n4. **🖼️ REFERENCE IMAGE** (bottom left) is *optional but highly recommended*.\n   - Switch **ON**: the photo's outfit, hair, jewelry, light and setting are encoded straight into the conditioning, with no LLM prompt extraction. Write only what should change (pose, clothes).\n   - Switch **OFF**: text only. Write a **full, detailed prompt** (hair, face, outfit, pose, setting, lighting).\n5. Pick a size in **Resolution Selector** and press **Run** (Ctrl+Enter).\n\n## 🅱️ B · Pose + expression\n- **Image 1** = the photo to edit. **Image 2** = whose face ends up in it. Same photo = she keeps her face; another person = face swap.\n- In the prompt, edit **only** the `change the facial expression:` and `change the pose:` sentences. The `head_swap: …` part before them is the LoRA's training caption: leave it as is.\n- Keep hands off the eyes and nose (over the mouth is fine).\n- Saves to `output/qwen-2.1/`.\n\n## 👁️ Live preview\nEvery pipeline has a **👁️ LIVE PREVIEW** group (Model Preview Override). By ~30% of the steps, face, pose and framing are readable: if it looks wrong, press **✕** next to **Run** to cancel. B's preview needs `taeqi2_1_decoder.pth` and the TAESD preview method (see ⬇️ DOWNLOADS).\n\n## ⚙️ How A works\n**① Load Models:** Kromoss UNET (INT8), Qwen3.5-9B text encoder (type `moss_image`) and the MOSS VAE, all with native ComfyUI loaders.\n\n**② Speed + Quality**\n- **Spectrum** predicts ~40% of the model passes from the real ones before them, which makes runs **~2.2× faster with no visible quality loss** (61.7 s → 27.8 s at 1024×1328 on a 3090). Bypass it (select it, then Ctrl+B) to compare.\n- **Skip Layer Guidance** skips layer 22 on the negative pass only. This is Kromoss's official recipe for cleaner structure.\n\n**③ Prompt + reference:** **🖼️ Vision Encode** turns your prompt *and* the reference photo (when its switch is ON) into the conditioning (through Qwen3.5's vision tower, no VAE). Leave its `negative_prompt` empty.\n\n**④ Image Size:** Resolution Selector sends width/height to the latent. Default: 9:16 at 2 MP.\n\n**⑤ Generate:** 50 steps · CFG 3 · `dpmpp_2m_sde` / `sgm_uniform`, then decode, then save to `output/kromoss/`.\n\n## 🛑 Don't\n- **Lower A's steps** below 50. Spectrum needs 8 warm-up + 2 final real steps.\n- **Add ModelSamplingSD3** to A. It breaks native MOSS (wrong timestep multiplier). Shift 5 is already built in; to change it, use **ModelSamplingAuraFlow**.\n- **Use `res_multistep_ancestral`.** It gives neon colors and posterization.\n\n## 🎛️ Sampler tips (A)\n- `dpmpp_2m_sde`: most skin and hair texture (default)\n- `er_sde` / `sa_solver`: natural middle ground\n- `euler`: smoother skin, can look waxy\n- SDE samplers change the composition even with the same seed.\n\n📘 Full guide: **README.md** in the package.\n"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 14,
+      "type": "ResolutionSelector",
+      "pos": [
+        1255.220278455302,
+        1722
+      ],
+      "size": [
+        260,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "aspect_ratio",
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "megapixels",
+          "name": "megapixels",
+          "type": "FLOAT",
+          "widget": {
+            "name": "megapixels"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "multiple",
+          "name": "multiple",
+          "type": "INT",
+          "widget": {
+            "name": "multiple"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview",
+          "name": "preview",
+          "shape": 7,
+          "type": "RESOLUTION_PREVIEW",
+          "widget": {
+            "name": "preview"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            12
+          ]
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ResolutionSelector",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "aspect_ratio": true,
+            "megapixels": true,
+            "multiple": true,
+            "preview": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "9:16 (Portrait Widescreen)",
+        2,
+        8
+      ],
+      "widgets_values_named": {
+        "aspect_ratio": "9:16 (Portrait Widescreen)",
+        "megapixels": 2,
+        "multiple": 8
+      }
+    },
+    {
+      "id": 17,
+      "type": "MarkdownNote",
+      "pos": [
+        639.2202784553018,
+        368
+      ],
+      "size": [
+        560,
+        760
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "⬇️ DOWNLOADS",
+      "properties": {
+        "Node name for S&R": "MarkdownNote",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# ⬇️ DOWNLOADS\n\n⚠️ **Update ComfyUI to 0.42.1 or newer first**, with native MOSS-Image and Qwen Image 2.1 support.\n\n## 🧩 Custom nodes (4)\n**ComfyUI-Spectrum-MOSS** (A speed-up)\nhttps://github.com/Rkkss/ComfyUI-Spectrum-MOSS\n\n**ComfyUI-MOSSImageTextEncoder** (A Vision Encode)\nhttps://github.com/ThetaCursed/ComfyUI-MOSSImageTextEncoder\n\n**ComfyUI-KJNodes** (live preview + B's Sage Attention patch)\nhttps://github.com/kijai/ComfyUI-KJNodes\n\n**rgthree-comfy** (🎛️ PIPELINE TOGGLES panel)\nhttps://github.com/rgthree/rgthree-comfy\n\nFastest: run the package's **install.bat** (or `python install.py`). It installs any missing node pack and model below.\nOr install them with *ComfyUI Manager → Install via Git URL*, or `git clone` them into `ComfyUI/custom_nodes/`, then **restart ComfyUI**.\n*Patch Sage Attention KJ (B) needs the `sageattention` Python package. Without it, set the node to **disabled**.*\n\n## 🧠 Models for A (4)\n**1. Kromoss UNET (INT8)** · 5.4 GB\n📁 `ComfyUI/models/diffusion_models/`\n[kromoss_int8_convrot.safetensors](https://huggingface.co/lodestones/Kromoss/resolve/main/diffusion_models/kromoss_int8_convrot.safetensors)\n\n**2. Text encoder (Qwen3.5-9B W4A8)** · 5.4 GB\n📁 `ComfyUI/models/text_encoders/`\n[qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors](https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/text_encoders/qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors)\nIncludes the vision tower the reference image needs. ⚠️ FP8 text encoders can't run the vision path.\n\n**3. VAE** · 125 MB\n📁 `ComfyUI/models/vae/`\n[moss_image_vae_bf16.safetensors](https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/vae/moss_image_vae_bf16.safetensors)\n\n**4. Live-preview decoder (FLUX.2 TAE)** · 3.3 MB\n📁 `ComfyUI/models/vae_approx/`\n[TAE_Flux2_AcademiaSD.safetensors](https://huggingface.co/AcademiaSD/TAE_Flux2_AcademiaSD/resolve/main/TAE_Flux2_AcademiaSD.safetensors)\n\n## 🧠 Models for B (6)\n**5. Qwen Image 2.1 (INT8)** · 7.3 GB\n📁 `ComfyUI/models/diffusion_models/`\n[qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors)\n\n**6. Text encoder (Qwen3-VL 8B INT8)** · 9.4 GB\n📁 `ComfyUI/models/text_encoders/`\n[qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors)\n\n**7. VAE** · 676 MB\n📁 `ComfyUI/models/vae/`\n[qwen_image_2.1_vae_bf16.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors)\n\n**8. BFS head-swap LoRA v1.1** · 260 MB\n📁 `ComfyUI/models/loras/`\n[bfs_head_v1.1_qwen_2.1.safetensors](https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_qwen_2.1.safetensors)\n\n**9. 8-step speed LoRA** · 336 MB\n📁 `ComfyUI/models/loras/`\nhttps://huggingface.co/RunningHubAI/rh-p-qwen-image-2.1-8step-v0.1-comfyui-t8-lora\nThe file there ends in `-comfyui-T8.safetensors`: re-select it in **LoRA · 8-step**.\n\n**10. Live-preview decoder (Qwen 2.1 TAE)** · 15 MB\n📁 `ComfyUI/models/vae_approx/`\n[taeqi2_1_decoder.pth](https://github.com/madebyollin/taesd/raw/main/taeqi2_1_decoder.pth)\nKeep the exact name. Leave B's preview node on `tiny_vae` = **none** and set ComfyUI's live preview method to **TAESD**.\n\nAfter downloading, **restart ComfyUI** (or press **R**) so the loaders list the new files, then re-select them if a loader shows red.\n\n## 📄 Model pages & licenses\n- Kromoss: https://huggingface.co/lodestones/Kromoss (Apache-2.0)\n- MOSS text encoder + VAE: https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI (Apache-2.0)\n- Qwen Image 2.1: https://huggingface.co/Comfy-Org/Qwen-Image-2.1 (custom license)\n- BFS: https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap (MIT)\n- taesd decoders: https://github.com/madebyollin/taesd (MIT)\n"
+      ],
+      "widgets_values_named": {
+        "text": "# ⬇️ DOWNLOADS\n\n⚠️ **Update ComfyUI to 0.42.1 or newer first**, with native MOSS-Image and Qwen Image 2.1 support.\n\n## 🧩 Custom nodes (4)\n**ComfyUI-Spectrum-MOSS** (A speed-up)\nhttps://github.com/Rkkss/ComfyUI-Spectrum-MOSS\n\n**ComfyUI-MOSSImageTextEncoder** (A Vision Encode)\nhttps://github.com/ThetaCursed/ComfyUI-MOSSImageTextEncoder\n\n**ComfyUI-KJNodes** (live preview + B's Sage Attention patch)\nhttps://github.com/kijai/ComfyUI-KJNodes\n\n**rgthree-comfy** (🎛️ PIPELINE TOGGLES panel)\nhttps://github.com/rgthree/rgthree-comfy\n\nFastest: run the package's **install.bat** (or `python install.py`). It installs any missing node pack and model below.\nOr install them with *ComfyUI Manager → Install via Git URL*, or `git clone` them into `ComfyUI/custom_nodes/`, then **restart ComfyUI**.\n*Patch Sage Attention KJ (B) needs the `sageattention` Python package. Without it, set the node to **disabled**.*\n\n## 🧠 Models for A (4)\n**1. Kromoss UNET (INT8)** · 5.4 GB\n📁 `ComfyUI/models/diffusion_models/`\n[kromoss_int8_convrot.safetensors](https://huggingface.co/lodestones/Kromoss/resolve/main/diffusion_models/kromoss_int8_convrot.safetensors)\n\n**2. Text encoder (Qwen3.5-9B W4A8)** · 5.4 GB\n📁 `ComfyUI/models/text_encoders/`\n[qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors](https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/text_encoders/qwen3.5_9b_moss_image_sft_w4a8_gptq.safetensors)\nIncludes the vision tower the reference image needs. ⚠️ FP8 text encoders can't run the vision path.\n\n**3. VAE** · 125 MB\n📁 `ComfyUI/models/vae/`\n[moss_image_vae_bf16.safetensors](https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI/resolve/main/vae/moss_image_vae_bf16.safetensors)\n\n**4. Live-preview decoder (FLUX.2 TAE)** · 3.3 MB\n📁 `ComfyUI/models/vae_approx/`\n[TAE_Flux2_AcademiaSD.safetensors](https://huggingface.co/AcademiaSD/TAE_Flux2_AcademiaSD/resolve/main/TAE_Flux2_AcademiaSD.safetensors)\n\n## 🧠 Models for B (6)\n**5. Qwen Image 2.1 (INT8)** · 7.3 GB\n📁 `ComfyUI/models/diffusion_models/`\n[qwen_image_2.1_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors)\n\n**6. Text encoder (Qwen3-VL 8B INT8)** · 9.4 GB\n📁 `ComfyUI/models/text_encoders/`\n[qwen3vl_8b_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors)\n\n**7. VAE** · 676 MB\n📁 `ComfyUI/models/vae/`\n[qwen_image_2.1_vae_bf16.safetensors](https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors)\n\n**8. BFS head-swap LoRA v1.1** · 260 MB\n📁 `ComfyUI/models/loras/`\n[bfs_head_v1.1_qwen_2.1.safetensors](https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap/resolve/main/bfs_head_v1.1_qwen_2.1.safetensors)\n\n**9. 8-step speed LoRA** · 336 MB\n📁 `ComfyUI/models/loras/`\nhttps://huggingface.co/RunningHubAI/rh-p-qwen-image-2.1-8step-v0.1-comfyui-t8-lora\nThe file there ends in `-comfyui-T8.safetensors`: re-select it in **LoRA · 8-step**.\n\n**10. Live-preview decoder (Qwen 2.1 TAE)** · 15 MB\n📁 `ComfyUI/models/vae_approx/`\n[taeqi2_1_decoder.pth](https://github.com/madebyollin/taesd/raw/main/taeqi2_1_decoder.pth)\nKeep the exact name. Leave B's preview node on `tiny_vae` = **none** and set ComfyUI's live preview method to **TAESD**.\n\nAfter downloading, **restart ComfyUI** (or press **R**) so the loaders list the new files, then re-select them if a loader shows red.\n\n## 📄 Model pages & licenses\n- Kromoss: https://huggingface.co/lodestones/Kromoss (Apache-2.0)\n- MOSS text encoder + VAE: https://huggingface.co/nif0/MOSS-Image-SFT-ComfyUI (Apache-2.0)\n- Qwen Image 2.1: https://huggingface.co/Comfy-Org/Qwen-Image-2.1 (custom license)\n- BFS: https://huggingface.co/Alissonerdx/BFS-Best-Face-Swap (MIT)\n- taesd decoders: https://github.com/madebyollin/taesd (MIT)\n"
+      },
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 18,
+      "type": "Note",
+      "pos": [
+        1255.220278455302,
+        368
+      ],
+      "size": [
+        600,
+        760
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "📱 MODERN iPHONE STYLE",
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "📱 MODERN iPHONE STYLE: crisp · HDR · clean\n\nHOW TO BUILD A PROMPT\n[OPENER + BEAUTY CLAUSE] + [your subject & scene] + [CLOSING BLOCK]\nAuto-style version: the 🔧 Prompt Builder adds these for you.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOPENER + BEAUTY CLAUSE (always the first words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nmodern sharp iPhone photo of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure,\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYOUR PART (the middle)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nContinue straight on from the beauty clause, starting with her hair.\nDon't restate her age:\nhair & skin → outfit → pose & expression → setting → light → who's holding the phone.\n   \"...a slim figure, long dark wavy hair, natural proportions. She wears ...\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCLOSING BLOCK (always the last words, use as-is)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nThe image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.\n\nBEST FOR: daylight, outdoors, travel, lifestyle, outfit shots.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nEXAMPLE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nmodern sharp iPhone photo of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure, a short black bob, thin gold glasses, natural proportions. She sits at a small round table outside a Paris café, smiling mid-sentence with one hand around a chipped white espresso cup. She wears a cream knit sweater with the sleeves pushed up and a slim silver watch. Wicker chairs, a half-eaten croissant on a paper napkin, a scooter parked at the curb and blurred pedestrians behind her, soft even light from a cloudy sky, photographed by a friend sitting across the table. The image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.\n"
+      ],
+      "widgets_values_named": {
+        "text": "📱 MODERN iPHONE STYLE: crisp · HDR · clean\n\nHOW TO BUILD A PROMPT\n[OPENER + BEAUTY CLAUSE] + [your subject & scene] + [CLOSING BLOCK]\nAuto-style version: the 🔧 Prompt Builder adds these for you.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOPENER + BEAUTY CLAUSE (always the first words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nmodern sharp iPhone photo of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure,\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYOUR PART (the middle)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nContinue straight on from the beauty clause, starting with her hair.\nDon't restate her age:\nhair & skin → outfit → pose & expression → setting → light → who's holding the phone.\n   \"...a slim figure, long dark wavy hair, natural proportions. She wears ...\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCLOSING BLOCK (always the last words, use as-is)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nThe image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.\n\nBEST FOR: daylight, outdoors, travel, lifestyle, outfit shots.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nEXAMPLE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nmodern sharp iPhone photo of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure, a short black bob, thin gold glasses, natural proportions. She sits at a small round table outside a Paris café, smiling mid-sentence with one hand around a chipped white espresso cup. She wears a cream knit sweater with the sleeves pushed up and a slim silver watch. Wicker chairs, a half-eaten croissant on a paper napkin, a scooter parked at the curb and blurred pedestrians behind her, soft even light from a cloudy sky, photographed by a friend sitting across the table. The image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.\n"
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 19,
+      "type": "Note",
+      "pos": [
+        1875.220278455302,
+        368
+      ],
+      "size": [
+        600,
+        760
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "📼 CHEAP PHONE STYLE",
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "📼 CHEAP PHONE STYLE: grainy · motion-soft · raw\n\nHOW TO BUILD A PROMPT\n[OPENER + BEAUTY CLAUSE] + [your subject & scene] + [CLOSING BLOCK]\nAuto-style version: the 🔧 Prompt Builder adds these for you.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOPENER + BEAUTY CLAUSE (always the first words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCheap phone iPhone grainy amateur of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure,\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYOUR PART (the middle)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nContinue straight on from the beauty clause, starting with her hair.\nDon't restate her age:\nhair & skin → outfit → pose & expression → setting → light → who's holding the phone.\n   \"...a slim figure, long dark wavy hair, natural proportions. She wears ...\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCLOSING BLOCK (always the last words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nShot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur [SCENE] footage.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFILL THE SLOT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n[SCENE] = the setting, 1-2 words\n   bedroom · night-out · car · party · bathroom-mirror · festival\n\nBEST FOR: indoor, night, low light, parties, mirror selfies, candid photo dumps.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nEXAMPLE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCheap phone iPhone grainy amateur of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure, messy blonde hair, natural proportions. She sits cross-legged on an unmade bed in front of a full-length mirror, taking a mirror selfie with the phone held at chest height, half-smiling with sleepy eyes. She wears an oversized grey hoodie and white ankle socks. Fairy lights taped crooked on the wall behind her, clothes piled on a chair, warm bedside lamp light mixed with blue glow from an open laptop. Shot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur bedroom footage.\n"
+      ],
+      "widgets_values_named": {
+        "text": "📼 CHEAP PHONE STYLE: grainy · motion-soft · raw\n\nHOW TO BUILD A PROMPT\n[OPENER + BEAUTY CLAUSE] + [your subject & scene] + [CLOSING BLOCK]\nAuto-style version: the 🔧 Prompt Builder adds these for you.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nOPENER + BEAUTY CLAUSE (always the first words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCheap phone iPhone grainy amateur of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure,\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYOUR PART (the middle)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nContinue straight on from the beauty clause, starting with her hair.\nDon't restate her age:\nhair & skin → outfit → pose & expression → setting → light → who's holding the phone.\n   \"...a slim figure, long dark wavy hair, natural proportions. She wears ...\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCLOSING BLOCK (always the last words)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nShot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur [SCENE] footage.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nFILL THE SLOT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n[SCENE] = the setting, 1-2 words\n   bedroom · night-out · car · party · bathroom-mirror · festival\n\nBEST FOR: indoor, night, low light, parties, mirror selfies, candid photo dumps.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nEXAMPLE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCheap phone iPhone grainy amateur of a 22-year-old attractive influencer with a stunningly beautiful model-like face, delicate symmetrical features, large doe eyes with long lashes, high cheekbones, a small straight nose and full lips, a slim figure, messy blonde hair, natural proportions. She sits cross-legged on an unmade bed in front of a full-length mirror, taking a mirror selfie with the phone held at chest height, half-smiling with sleepy eyes. She wears an oversized grey hoodie and white ankle socks. Fairy lights taped crooked on the wall behind her, clothes piled on a chair, warm bedside lamp light mixed with blue glow from an open laptop. Shot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur bedroom footage.\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 20,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        480,
+        1916.5
+      ],
+      "size": [
+        716.972265625,
+        609.6969881924688
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "value",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            14,
+            15
+          ]
+        }
+      ],
+      "title": "✏️ YOUR PROMPT · Reference ON: only what to change (pose, clothes) · OFF: full detailed description",
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "value": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "wearing a camo cap , doing the middle finger"
+      ],
+      "widgets_values_named": {
+        "value": "wearing a camo cap , doing the middle finger"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 21,
+      "type": "PrimitiveString",
+      "pos": [
+        40,
+        2072.5
+      ],
+      "size": [
+        420,
+        80
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "value",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "🏷️ Scene word (Cheap phone only)",
+      "properties": {
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "value": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "beach-day"
+      ],
+      "widgets_values_named": {
+        "value": "beach-day"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 22,
+      "type": "StringConcatenate",
+      "pos": [
+        1255.220278455302,
+        2160
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "string_a",
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "string_b",
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 14
+        },
+        {
+          "localized_name": "delimiter",
+          "name": "delimiter",
+          "type": "STRING",
+          "widget": {
+            "name": "delimiter"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "title": "Modern: opener + beauty clause + your text",
+      "properties": {
+        "Node name for S&R": "StringConcatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "string_a": true,
+            "string_b": true,
+            "delimiter": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "modern sharp iPhone 16 Pro main camera photo of a 22-year-old very attractive influencer girl with a slim hourglass shape",
+        "",
+        " "
+      ],
+      "widgets_values_named": {
+        "string_a": "modern sharp iPhone 16 Pro main camera photo of a 22-year-old very attractive influencer girl with a slim hourglass shape",
+        "string_b": "",
+        "delimiter": " "
+      },
+      "color": "#333",
+      "bgcolor": "#444"
+    },
+    {
+      "id": 23,
+      "type": "StringConcatenate",
+      "pos": [
+        1695.220278455302,
+        2160
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "string_a",
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": 16
+        },
+        {
+          "localized_name": "string_b",
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "delimiter",
+          "name": "delimiter",
+          "type": "STRING",
+          "widget": {
+            "name": "delimiter"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "title": "Modern: + closing block",
+      "properties": {
+        "Node name for S&R": "StringConcatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "string_a": true,
+            "string_b": true,
+            "delimiter": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "The image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.",
+        " "
+      ],
+      "widgets_values_named": {
+        "string_a": "",
+        "string_b": "The image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.",
+        "delimiter": " "
+      },
+      "color": "#333",
+      "bgcolor": "#444"
+    },
+    {
+      "id": 24,
+      "type": "StringReplace",
+      "pos": [
+        2135.220278455302,
+        2450
+      ],
+      "size": [
+        460,
+        196
+      ],
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "string",
+          "name": "string",
+          "type": "STRING",
+          "widget": {
+            "name": "string"
+          },
+          "link": 18
+        },
+        {
+          "localized_name": "find",
+          "name": "find",
+          "type": "STRING",
+          "widget": {
+            "name": "find"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "replace",
+          "name": "replace",
+          "type": "STRING",
+          "widget": {
+            "name": "replace"
+          },
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "Cheap: fill [SCENE] with Scene word",
+      "properties": {
+        "Node name for S&R": "StringReplace",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "string": true,
+            "find": true,
+            "replace": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "[SCENE]",
+        ""
+      ],
+      "widgets_values_named": {
+        "string": "",
+        "find": "[SCENE]",
+        "replace": ""
+      },
+      "color": "#333",
+      "bgcolor": "#444"
+    },
+    {
+      "id": 25,
+      "type": "StringConcatenate",
+      "pos": [
+        1255.220278455302,
+        2450
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "string_a",
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "string_b",
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": 15
+        },
+        {
+          "localized_name": "delimiter",
+          "name": "delimiter",
+          "type": "STRING",
+          "widget": {
+            "name": "delimiter"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "title": "Cheap: opener + beauty clause + your text",
+      "properties": {
+        "Node name for S&R": "StringConcatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "string_a": true,
+            "string_b": true,
+            "delimiter": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Cheap phone iPhone grainy amateur of a 22-year-old very attractive influencer girl with full lips, long eyelashes and a slim hourglass shape, ",
+        "",
+        " "
+      ],
+      "widgets_values_named": {
+        "string_a": "Cheap phone iPhone grainy amateur of a 22-year-old very attractive influencer girl with full lips, long eyelashes and a slim hourglass shape, ",
+        "string_b": "",
+        "delimiter": " "
+      },
+      "color": "#333",
+      "bgcolor": "#444"
+    },
+    {
+      "id": 26,
+      "type": "StringConcatenate",
+      "pos": [
+        1695.220278455302,
+        2450
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "string_a",
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": 17
+        },
+        {
+          "localized_name": "string_b",
+          "name": "string_b",
+          "type": "STRING",
+          "widget": {
+            "name": "string_b"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "delimiter",
+          "name": "delimiter",
+          "type": "STRING",
+          "widget": {
+            "name": "delimiter"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "Cheap: + closing block",
+      "properties": {
+        "Node name for S&R": "StringConcatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "string_a": true,
+            "string_b": true,
+            "delimiter": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "Shot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur [SCENE] footage.",
+        " "
+      ],
+      "widgets_values_named": {
+        "string_a": "",
+        "string_b": "Shot on a cheap iPhone, heavy digital grain, slight noise and compression artifacts, imperfect focus, subtle motion softness, realistic skin texture, accurate anatomy, authentic amateur [SCENE] footage.",
+        "delimiter": " "
+      },
+      "color": "#333",
+      "bgcolor": "#444"
+    },
+    {
+      "id": 27,
+      "type": "ComfySwitchNode",
+      "pos": [
+        40,
+        1916.5
+      ],
+      "size": [
+        420,
+        90
+      ],
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "on_false",
+          "name": "on_false",
+          "shape": 7,
+          "type": "STRING",
+          "link": 21
+        },
+        {
+          "localized_name": "on_true",
+          "name": "on_true",
+          "shape": 7,
+          "type": "STRING",
+          "link": 20
+        },
+        {
+          "localized_name": "switch",
+          "name": "switch",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "switch"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "output",
+          "name": "output",
+          "type": "STRING",
+          "links": [
+            23,
+            25
+          ]
+        }
+      ],
+      "title": "🎛️ STYLE: ON = Modern iPhone · OFF = Cheap phone",
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "switch": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        true
+      ],
+      "widgets_values_named": {
+        "switch": true
+      },
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 28,
+      "type": "PreviewAny",
+      "pos": [
+        2127.220278455302,
+        1624
+      ],
+      "size": [
+        500,
+        140
+      ],
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "👁️ FINAL PROMPT (what the model sees)",
+      "properties": {
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 29,
+      "type": "Note",
+      "pos": [
+        40,
+        2202.5
+      ],
+      "size": [
+        420,
+        380
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "🎛️ AUTO-STYLE: HOW TO USE",
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "🎛️ AUTO-STYLE: HOW TO USE\n\n1. Flip the STYLE switch\n   ON  = 📱 Modern iPhone\n   OFF = 📼 Cheap phone\n\n2. Write in the big box (the opener + beauty\n   clause are added in front of it):\n   🖼️ Reference ON: only what should change.\n      e.g.  wearing a camo cap, doing the middle finger\n   🖼️ Reference OFF: a full description, starting\n      with her hair.\n      e.g.  long dark wavy hair, fair skin, natural\n            proportions. She sits ..., wearing ...\n\n3. Cheap phone only: set the Scene word\n   (bedroom · night-out · car · party · festival).\n   Modern ignores it.\n\n4. Queue. The full assembled prompt shows in\n   👁️ FINAL PROMPT (top, under 🖼️ Vision Encode).\n\nTo change a style's opener, beauty clause or\nclosing block, edit the gray nodes in 🔧 Prompt Builder."
+      ],
+      "widgets_values_named": {
+        "text": "🎛️ AUTO-STYLE: HOW TO USE\n\n1. Flip the STYLE switch\n   ON  = 📱 Modern iPhone\n   OFF = 📼 Cheap phone\n\n2. Write in the big box (the opener + beauty\n   clause are added in front of it):\n   🖼️ Reference ON: only what should change.\n      e.g.  wearing a camo cap, doing the middle finger\n   🖼️ Reference OFF: a full description, starting\n      with her hair.\n      e.g.  long dark wavy hair, fair skin, natural\n            proportions. She sits ..., wearing ...\n\n3. Cheap phone only: set the Scene word\n   (bedroom · night-out · car · party · festival).\n   Modern ignores it.\n\n4. Queue. The full assembled prompt shows in\n   👁️ FINAL PROMPT (top, under 🖼️ Vision Encode).\n\nTo change a style's opener, beauty clause or\nclosing block, edit the gray nodes in 🔧 Prompt Builder."
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 30,
+      "type": "TextEncodeMOSSImageVision",
+      "pos": [
+        2127.220278455302,
+        1244
+      ],
+      "size": [
+        500,
+        330
+      ],
+      "flags": {},
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 24
+        },
+        {
+          "localized_name": "image",
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 226
+        },
+        {
+          "localized_name": "prompt",
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 25
+        },
+        {
+          "localized_name": "negative_prompt",
+          "name": "negative_prompt",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "image_weight",
+          "name": "image_weight",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "image_weight"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "vision_megapixels",
+          "name": "vision_megapixels",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "vision_megapixels"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "system_prompt",
+          "name": "system_prompt",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "system_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "print_prompt",
+          "name": "print_prompt",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "print_prompt"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ]
+        },
+        {
+          "localized_name": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "title": "🖼️ Vision Encode: prompt + reference (negative: leave empty)",
+      "properties": {
+        "Node name for S&R": "TextEncodeMOSSImageVision",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "prompt": true,
+            "negative_prompt": true,
+            "image_weight": true,
+            "vision_megapixels": true,
+            "system_prompt": true,
+            "print_prompt": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "",
+        1,
+        1,
+        "",
+        false
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "negative_prompt": "",
+        "image_weight": 1,
+        "vision_megapixels": 1,
+        "system_prompt": "",
+        "print_prompt": false
+      }
+    },
+    {
+      "id": 31,
+      "type": "LoadImage",
+      "pos": [
+        40,
+        2854.5
+      ],
+      "size": [
+        480,
+        550
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            225
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "🖼️ Reference image",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "fdd876ae74f1002d44eb70b88dbaa35d.jpg",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "fdd876ae74f1002d44eb70b88dbaa35d.jpg",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 32,
+      "type": "Note",
+      "pos": [
+        607.8169921875,
+        2698.5
+      ],
+      "size": [
+        440,
+        660
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "🖼️ REFERENCE IMAGE: HOW TO USE",
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "🖼️ REFERENCE IMAGE: OPTIONAL, HIGHLY RECOMMENDED\n\n🎛️ The REFERENCE switch above the photo turns it on or off.\n\n✅ ON (recommended)\nQwen3.5's vision tower reads the photo and encodes its elements (outfit, hair, jewelry, light, setting, vibe) straight into the conditioning. No LLM prompt extraction needed: in the ✏️ box you only write what should change (pose, clothes, expression).\n\n⬜ OFF\nPure text: nothing comes from a photo. You must write a FULL, detailed prompt in the ✏️ box: hair, face, body, outfit, pose, setting, lighting, framing.\n\n⚠️ IT IS STRONG. Test (seed 42): beach prompt + a bedroom selfie as reference. The outfit, green hair, choker, cross necklaces and even the bed and plush toy came through, beating the words \"brown hair, white crochet bikini\".\n\nBEST USE: LOCK A LOOK\n  • Let the image carry outfit / hair / jewelry / vibe.\n  • Use your text for what should change: setting, pose, light.\n  • Props from the reference background leak in. A reference cropped tight on the person gives the model less to copy.\n\nimage_weight (on 🖼️ Vision Encode, top):\n  1.0      = standard (default)\n  0.25-0.5 = only a little softer: outfit, choker and headboard still came through at 0.25.\n  0 also turns the reference off, but the switch is clearer.\n\nvision_megapixels (default 1.0): max size of the reference before the vision tower. Bigger photos are shrunk; smaller ones stay as they are.\n\n🛑 Keep the KSampler's negative wired to Vision Encode (its negative carries the image too). With a plain empty negative, CFG 3 amplifies the reference even more: green color cast, more copying."
+      ],
+      "widgets_values_named": {
+        "text": "🖼️ REFERENCE IMAGE: OPTIONAL, HIGHLY RECOMMENDED\n\n🎛️ The REFERENCE switch above the photo turns it on or off.\n\n✅ ON (recommended)\nQwen3.5's vision tower reads the photo and encodes its elements (outfit, hair, jewelry, light, setting, vibe) straight into the conditioning. No LLM prompt extraction needed: in the ✏️ box you only write what should change (pose, clothes, expression).\n\n⬜ OFF\nPure text: nothing comes from a photo. You must write a FULL, detailed prompt in the ✏️ box: hair, face, body, outfit, pose, setting, lighting, framing.\n\n⚠️ IT IS STRONG. Test (seed 42): beach prompt + a bedroom selfie as reference. The outfit, green hair, choker, cross necklaces and even the bed and plush toy came through, beating the words \"brown hair, white crochet bikini\".\n\nBEST USE: LOCK A LOOK\n  • Let the image carry outfit / hair / jewelry / vibe.\n  • Use your text for what should change: setting, pose, light.\n  • Props from the reference background leak in. A reference cropped tight on the person gives the model less to copy.\n\nimage_weight (on 🖼️ Vision Encode, top):\n  1.0      = standard (default)\n  0.25-0.5 = only a little softer: outfit, choker and headboard still came through at 0.25.\n  0 also turns the reference off, but the switch is clearer.\n\nvision_megapixels (default 1.0): max size of the reference before the vision tower. Bigger photos are shrunk; smaller ones stay as they are.\n\n🛑 Keep the KSampler's negative wired to Vision Encode (its negative carries the image too). With a plain empty negative, CFG 3 amplifies the reference even more: green color cast, more copying."
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 33,
+      "type": "ModelPreviewOverrideKJ",
+      "pos": [
+        2051.220278455302,
+        2806
+      ],
+      "size": [
+        400,
+        700
+      ],
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 29
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "localized_name": "max_resolution",
+          "name": "max_resolution",
+          "type": "INT",
+          "widget": {
+            "name": "max_resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "jpeg_quality",
+          "name": "jpeg_quality",
+          "type": "INT",
+          "widget": {
+            "name": "jpeg_quality"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "suppress_default_preview",
+          "name": "suppress_default_preview",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "suppress_default_preview"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview_frames",
+          "name": "preview_frames",
+          "type": "INT",
+          "widget": {
+            "name": "preview_frames"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview_fps",
+          "name": "preview_fps",
+          "type": "INT",
+          "widget": {
+            "name": "preview_fps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tiny_vae",
+          "name": "tiny_vae",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "tiny_vae"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "title": "👁️ Model Preview Override (live preview)",
+      "properties": {
+        "Node name for S&R": "ModelPreviewOverrideKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "max_resolution": true,
+            "jpeg_quality": true,
+            "suppress_default_preview": true,
+            "preview_frames": true,
+            "preview_fps": true,
+            "tiny_vae": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        768,
+        80,
+        true,
+        1,
+        12,
+        "TAE_Flux2_AcademiaSD.safetensors",
+        ""
+      ],
+      "widgets_values_named": {
+        "max_resolution": 768,
+        "jpeg_quality": 80,
+        "suppress_default_preview": true,
+        "preview_frames": 1,
+        "preview_fps": 12,
+        "tiny_vae": "TAE_Flux2_AcademiaSD.safetensors",
+        "preview": ""
+      }
+    },
+    {
+      "id": 101,
+      "type": "UNETLoader",
+      "pos": [
+        2755.220278455302,
+        368
+      ],
+      "size": [
+        380,
+        82
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "weight_dtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            101
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "unet_name": true,
+            "weight_dtype": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen_image_2.1_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 102,
+      "type": "CLIPLoader",
+      "pos": [
+        2755.220278455302,
+        504
+      ],
+      "size": [
+        380,
+        106
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip_name",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "type",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "device",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            107
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "clip_name": true,
+            "type": true,
+            "device": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen3vl_8b_int8_convrot.safetensors",
+        "qwen_image",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+        "type": "qwen_image",
+        "device": "default"
+      }
+    },
+    {
+      "id": 103,
+      "type": "VAELoader",
+      "pos": [
+        2755.220278455302,
+        668
+      ],
+      "size": [
+        380,
+        58
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            108,
+            120
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "vae_name": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen_image_2.1_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 104,
+      "type": "PathchSageAttentionKJ",
+      "pos": [
+        3155.220278455302,
+        368
+      ],
+      "size": [
+        380,
+        82
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 101
+        },
+        {
+          "localized_name": "sage_attention",
+          "name": "sage_attention",
+          "type": "COMBO",
+          "widget": {
+            "name": "sage_attention"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "allow_compile",
+          "name": "allow_compile",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "allow_compile"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            102
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PathchSageAttentionKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "sage_attention": true,
+            "allow_compile": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "auto",
+        true
+      ],
+      "widgets_values_named": {
+        "sage_attention": "auto",
+        "allow_compile": true
+      }
+    },
+    {
+      "id": 105,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        3155.220278455302,
+        532
+      ],
+      "size": [
+        380,
+        82
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 102
+        },
+        {
+          "localized_name": "lora_name",
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strength_model",
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            103
+          ]
+        }
+      ],
+      "title": "LoRA · BFS head",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "lora_name": true,
+            "strength_model": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "bfs_head_v1.1_qwen_2.1.safetensors",
+        0.9
+      ],
+      "widgets_values_named": {
+        "lora_name": "bfs_head_v1.1_qwen_2.1.safetensors",
+        "strength_model": 0.9
+      }
+    },
+    {
+      "id": 106,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        3155.220278455302,
+        672
+      ],
+      "size": [
+        380,
+        82
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 103
+        },
+        {
+          "localized_name": "lora_name",
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strength_model",
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            104
+          ]
+        }
+      ],
+      "title": "LoRA · 8-step",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "lora_name": true,
+            "strength_model": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "p_qwen_image_2.1_8step_v0.1.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "p_qwen_image_2.1_8step_v0.1.safetensors",
+        "strength_model": 1
+      }
+    },
+    {
+      "id": 107,
+      "type": "RescaleCFG",
+      "pos": [
+        3555.220278455302,
+        368
+      ],
+      "size": [
+        340,
+        58
+      ],
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 104
+        },
+        {
+          "localized_name": "multiplier",
+          "name": "multiplier",
+          "type": "FLOAT",
+          "widget": {
+            "name": "multiplier"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            105
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RescaleCFG",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "multiplier": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0.7
+      ],
+      "widgets_values_named": {
+        "multiplier": 0.7
+      }
+    },
+    {
+      "id": 108,
+      "type": "QwenImage21Cache",
+      "pos": [
+        3555.220278455302,
+        480
+      ],
+      "size": [
+        340,
+        82
+      ],
+      "flags": {},
+      "order": 58,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 105
+        },
+        {
+          "localized_name": "device",
+          "name": "device",
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "dtype",
+          "name": "dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            122
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QwenImage21Cache",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "device": true,
+            "dtype": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "auto",
+        "default"
+      ],
+      "widgets_values_named": {
+        "device": "auto",
+        "dtype": "default"
+      }
+    },
+    {
+      "id": 111,
+      "type": "LoadImage",
+      "pos": [
+        2755.220278455302,
+        878
+      ],
+      "size": [
+        380,
+        470
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            109,
+            229
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Image 1 · base photo (pose + scene)",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "bfs-pose-expr_00009_.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "bfs-pose-expr_00009_.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 112,
+      "type": "LoadImage",
+      "pos": [
+        3191.220278455302,
+        878
+      ],
+      "size": [
+        380,
+        470
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            110
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Image 2 · face / head source",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen21_00025_.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "qwen21_00025_.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 113,
+      "type": "LoadImage",
+      "pos": [
+        3627.220278455302,
+        878
+      ],
+      "size": [
+        380,
+        470
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 4,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "title": "Image 3 · spare (unwired)",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "0005.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "0005.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 110,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        4063.220278455302,
+        368
+      ],
+      "size": [
+        520,
+        760
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 107
+        },
+        {
+          "localized_name": "image_1",
+          "name": "images.image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 109
+        },
+        {
+          "localized_name": "image_2",
+          "name": "images.image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 110
+        },
+        {
+          "localized_name": "image_3",
+          "name": "images.image_3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 108
+        },
+        {
+          "localized_name": "prompt",
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "negative_prompt",
+          "name": "negative_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "resolution",
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        },
+        {
+          "name": "images.image_4",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            112
+          ]
+        },
+        {
+          "localized_name": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            113
+          ]
+        },
+        {
+          "localized_name": "latent",
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            114
+          ]
+        }
+      ],
+      "title": "Prompt · BFS head swap + new pose / expression",
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "prompt": true,
+            "negative_prompt": true,
+            "resolution": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "head_swap: start with <image1> as the base image, keeping its lighting, environment, and background, and her outfit. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>. the face stays the same size and position in the frame, skin texture and lighting on the face matching the scene, high quality, sharp details, 4k",
+        "airbrushed skin, plastic skin, pasted-on cutout, sticker edge, white halo, dark halo, visible seam at the neck, mismatched skin tone between face and neck, floating feet, missing contact shadow, detached shadow, mismatched perspective, mismatched scale, studio lighting, dramatic rim light, beauty lighting, excessive cleavage, transparent clothing, oversharpened subject, clean digital subject against a noisy background, pursed lips, kissy face, duck face, middle finger, hand covering eyes, hand covering nose, extra limbs, deformed hands, extra fingers, fused fingers, duplicate person, altered body proportions, artificial pose, inconsistent motion blur",
+        0
+      ],
+      "widgets_values_named": {
+        "prompt": "head_swap: start with <image1> as the base image, keeping its lighting, environment, and background, and her outfit. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>. the face stays the same size and position in the frame, skin texture and lighting on the face matching the scene, high quality, sharp details, 4k",
+        "negative_prompt": "airbrushed skin, plastic skin, pasted-on cutout, sticker edge, white halo, dark halo, visible seam at the neck, mismatched skin tone between face and neck, floating feet, missing contact shadow, detached shadow, mismatched perspective, mismatched scale, studio lighting, dramatic rim light, beauty lighting, excessive cleavage, transparent clothing, oversharpened subject, clean digital subject against a noisy background, pursed lips, kissy face, duck face, middle finger, hand covering eyes, hand covering nose, extra limbs, deformed hands, extra fingers, fused fingers, duplicate person, altered body proportions, artificial pose, inconsistent motion blur",
+        "resolution": 0
+      }
+    },
+    {
+      "id": 115,
+      "type": "ResolutionSelector",
+      "pos": [
+        4639.220278455302,
+        368
+      ],
+      "size": [
+        380,
+        230
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "localized_name": "aspect_ratio",
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "megapixels",
+          "name": "megapixels",
+          "type": "FLOAT",
+          "widget": {
+            "name": "megapixels"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "multiple",
+          "name": "multiple",
+          "type": "INT",
+          "widget": {
+            "name": "multiple"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview",
+          "name": "preview",
+          "shape": 7,
+          "type": "RESOLUTION_PREVIEW",
+          "widget": {
+            "name": "preview"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            115
+          ]
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            116
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ResolutionSelector",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "aspect_ratio": true,
+            "megapixels": true,
+            "multiple": true,
+            "preview": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "3:4 (Portrait Standard)",
+        1.5,
+        32
+      ],
+      "widgets_values_named": {
+        "aspect_ratio": "3:4 (Portrait Standard)",
+        "megapixels": 1.5,
+        "multiple": 32
+      }
+    },
+    {
+      "id": 116,
+      "type": "EmptyLatentImage",
+      "pos": [
+        4639.220278455302,
+        648
+      ],
+      "size": [
+        380,
+        106
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 115
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 116
+        },
+        {
+          "localized_name": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            117
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "width": true,
+            "height": true,
+            "batch_size": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        1088,
+        1440,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1088,
+        "height": 1440,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 117,
+      "type": "ComfySwitchNode",
+      "pos": [
+        4639.220278455302,
+        808
+      ],
+      "size": [
+        397.8638671875,
+        106
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "on_false",
+          "name": "on_false",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 114
+        },
+        {
+          "localized_name": "on_true",
+          "name": "on_true",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 117
+        },
+        {
+          "localized_name": "switch",
+          "name": "switch",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "switch"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "output",
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            118
+          ]
+        }
+      ],
+      "title": "Size source: ON = Resolution Selector · OFF = Image 1",
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "switch": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        false
+      ],
+      "widgets_values_named": {
+        "switch": false
+      }
+    },
+    {
+      "id": 120,
+      "type": "KSampler",
+      "pos": [
+        4639.220278455302,
+        1030
+      ],
+      "size": [
+        380,
+        340
+      ],
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 123
+        },
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 112
+        },
+        {
+          "localized_name": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 113
+        },
+        {
+          "localized_name": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 118
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "sampler_name",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "scheduler",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "denoise",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            119
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "seed": true,
+            "steps": true,
+            "cfg": true,
+            "sampler_name": true,
+            "scheduler": true,
+            "denoise": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        43,
+        "fixed",
+        20,
+        3,
+        "res_multistep",
+        "sgm_uniform",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 43,
+        "control_after_generate": "fixed",
+        "steps": 20,
+        "cfg": 3,
+        "sampler_name": "res_multistep",
+        "scheduler": "sgm_uniform",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 130,
+      "type": "VAEDecode",
+      "pos": [
+        5093.084145642802,
+        368
+      ],
+      "size": [
+        300,
+        46
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 119
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 120
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            121
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 131,
+      "type": "SaveImage",
+      "pos": [
+        5093.084145642802,
+        472
+      ],
+      "size": [
+        420,
+        700
+      ],
+      "flags": {},
+      "order": 66,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 121
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            230
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "filename_prefix": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "qwen-2.1/bfs-pose-expr"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "qwen-2.1/bfs-pose-expr"
+      }
+    },
+    {
+      "id": 140,
+      "type": "MarkdownNote",
+      "pos": [
+        6465.084145642802,
+        368
+      ],
+      "size": [
+        560,
+        360
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note: BFS pose / expression",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "## How to use: BFS head swap + new pose / expression\n- **Image 1** = base photo (body, scene, lighting, outfit). Loaded: `bfs_base_ramen_camo_cap.png`.\n- **Image 2** = face / head source (identity, hair, eye color). Default: the same photo as Image 1, so she keeps her own face and only the pose / expression change. Load a different face here to swap identity.\n- **Image 3** is unwired on purpose: BFS is a 2-image LoRA, and toggling Pipeline B off → on would otherwise switch it back on. Wire it to `image_3` only if you really need a third reference.\n- **Prompt**: the `head_swap: ... from <image2>.` part is the LoRA's exact training caption. Leave it. Edit only the `change the facial expression:` and `change the pose:` sentences.\n- BFS normally *copies* head angle + expression from Image 1. That clause is replaced here, so try a few seeds if the old expression bleeds through.\n- **Size**: switch OFF = match Image 1 (default here: keeps head size/position for the swap).\n- **Hand over face**: keep it over the mouth/chin. Hands over the eyes or nose are BFS's weakest case (per the model card) and break the swap.\n- **Live preview** (👁️ group): KJ Model Preview Override with `tiny_vae` = **none** on purpose. ComfyUI's core previewer picks up `taeqi2_1_decoder.pth` from models/vae_approx for sharp frames. KJ's own slot can't load that file. Needs the frontend preview method set to TAESD (it is).\n"
+      ],
+      "widgets_values_named": {
+        "text": "## How to use: BFS head swap + new pose / expression\n- **Image 1** = base photo (body, scene, lighting, outfit). Loaded: `bfs_base_ramen_camo_cap.png`.\n- **Image 2** = face / head source (identity, hair, eye color). Default: the same photo as Image 1, so she keeps her own face and only the pose / expression change. Load a different face here to swap identity.\n- **Image 3** is unwired on purpose: BFS is a 2-image LoRA, and toggling Pipeline B off → on would otherwise switch it back on. Wire it to `image_3` only if you really need a third reference.\n- **Prompt**: the `head_swap: ... from <image2>.` part is the LoRA's exact training caption. Leave it. Edit only the `change the facial expression:` and `change the pose:` sentences.\n- BFS normally *copies* head angle + expression from Image 1. That clause is replaced here, so try a few seeds if the old expression bleeds through.\n- **Size**: switch OFF = match Image 1 (default here: keeps head size/position for the swap).\n- **Hand over face**: keep it over the mouth/chin. Hands over the eyes or nose are BFS's weakest case (per the model card) and break the swap.\n- **Live preview** (👁️ group): KJ Model Preview Override with `tiny_vae` = **none** on purpose. ComfyUI's core previewer picks up `taeqi2_1_decoder.pth` from models/vae_approx for sharp frames. KJ's own slot can't load that file. Needs the frontend preview method set to TAESD (it is).\n"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 150,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        0,
+        30
+      ],
+      "size": [
+        560,
+        130
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "🎛️ PIPELINE TOGGLES: on = runs · off = bypassed",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "^PIPELINE ",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 141,
+      "type": "ModelPreviewOverrideKJ",
+      "pos": [
+        6009.084145642802,
+        368
+      ],
+      "size": [
+        400,
+        700
+      ],
+      "flags": {},
+      "order": 61,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 122
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "localized_name": "max_resolution",
+          "name": "max_resolution",
+          "type": "INT",
+          "widget": {
+            "name": "max_resolution"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "jpeg_quality",
+          "name": "jpeg_quality",
+          "type": "INT",
+          "widget": {
+            "name": "jpeg_quality"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "suppress_default_preview",
+          "name": "suppress_default_preview",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "suppress_default_preview"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview_frames",
+          "name": "preview_frames",
+          "type": "INT",
+          "widget": {
+            "name": "preview_frames"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "preview_fps",
+          "name": "preview_fps",
+          "type": "INT",
+          "widget": {
+            "name": "preview_fps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tiny_vae",
+          "name": "tiny_vae",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "tiny_vae"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            123
+          ]
+        }
+      ],
+      "title": "👁️ B · Model Preview Override (Qwen 2.1 tiny VAE via core)",
+      "properties": {
+        "Node name for S&R": "ModelPreviewOverrideKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "max_resolution": true,
+            "jpeg_quality": true,
+            "suppress_default_preview": true,
+            "preview_frames": true,
+            "preview_fps": true,
+            "tiny_vae": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        768,
+        80,
+        true,
+        1,
+        12,
+        "none",
+        ""
+      ],
+      "widgets_values_named": {
+        "max_resolution": 768,
+        "jpeg_quality": 80,
+        "suppress_default_preview": true,
+        "preview_frames": 1,
+        "preview_fps": 12,
+        "tiny_vae": "none",
+        "preview": ""
+      }
+    },
+    {
+      "id": 34,
+      "type": "ComfySwitchNode",
+      "pos": [
+        40,
+        2698.5
+      ],
+      "size": [
+        547.8169921875,
+        90
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "on_false",
+          "name": "on_false",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "on_true",
+          "name": "on_true",
+          "shape": 7,
+          "type": "*",
+          "link": 225
+        },
+        {
+          "localized_name": "switch",
+          "name": "switch",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "switch"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "output",
+          "name": "output",
+          "type": "IMAGE",
+          "links": [
+            226
+          ]
+        }
+      ],
+      "title": "🖼️ REFERENCE: ON = steer with this photo (recommended) · OFF = text only",
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "switch": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        true
+      ],
+      "widgets_values_named": {
+        "switch": true
+      }
+    },
+    {
+      "id": 223,
+      "type": "MarkdownNote",
+      "pos": [
+        6465.084145642802,
+        778
+      ],
+      "size": [
+        560,
+        760
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "HEAD SWAP",
+      "properties": {
+        "Node name for S&R": "MarkdownNote",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "## 🔄 HEAD SWAP: DEFAULT PROMPT + BEST PRACTICES\n\n### 🖼️ Image order (don't swap them)\n- **Image 1** = the base shot: body, outfit, pose, scene, lighting.\n- **Image 2** = the head to put in: face, hair, eye color, nose.\n\n### ✍️ Default head-swap prompt\n```\nhead_swap: start with <image1> as the base image, keeping its lighting, environment, and background, and her outfit. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>. the face stays the same size and position in the frame, skin texture and lighting on the face matching the scene, high quality, sharp details, 4k\n```\n- The `head_swap: … from <image2>.` part is the LoRA's **training caption**. Keep it word for word.\n- **Keep the expression:** leave the `copy the direction of the eye…` sentence as is.\n- **Change the expression or pose:** replace that sentence with `change the facial expression: …` and/or `change the pose: …`.\n- **Hats, glasses, earrings:** add them to the keep list (`…and her outfit, the cap on her head`), or they may be swapped away.\n- **Body traits from Image 2** (e.g. `Also give <image1> the … from <image2>`): BFS only swaps heads, so this relies on Qwen's own editing and is less reliable.\n\n### 🚫 Negative prompt\n- **Delete anything the positive asks for.** Keeping a duck face? Remove `duck face, pursed lips`. Asking for a bigger bust? Remove `excessive cleavage, altered body proportions`.\n- Never put identity words (`different face`, `altered identity`) in the negative. They fight the swap.\n\n### 📸 Choosing images\n**Image 2 (face):**\n- Large, sharp, roughly front-facing, evenly lit.\n- Nothing over the eyes or nose: no hands, hair or sunglasses.\n- Crop it to the head and shoulders. Other people or busy backgrounds can leak in.\n- Its hair comes along, so pick a hairstyle you want.\n\n**Image 1 (base):**\n- The face should be clearly visible and not tiny.\n- Similar head angle and lighting to Image 2 swap cleanest.\n- Similar hair length too: long hair outside the head area can survive the swap.\n- Avoid hands over the face. That's where BFS breaks.\n\n### ⚙️ Settings\n- **BFS LoRA strength:** 0.9 here. The model card suggests starting at 1.0.\n- **BFS version:** v1.1 = best head-angle accuracy. v1.1 *alternative* = stronger expression copy from Image 1.\n- **Size switch OFF** (match Image 1) keeps the head in the same place.\n- **Bigger output = more face detail.** Use a larger Image 1 if you can.\n- **Fixed seed** for A/B tests; change only the seed when the result is close but off.\n- **Not swapping a head** (car or outfit swap)? Set the BFS LoRA to **0**, or it may pull the head from Image 2.\n\n### ✅ Check every result\n- Hairline, neck seam, skin tone match between face and neck, leftover hair from Image 1.\n\n⚠️ Only swap faces you have the rights to: your own AI characters, or people who gave consent.\n\n"
+      ],
+      "widgets_values_named": {
+        "text": "## 🔄 HEAD SWAP: DEFAULT PROMPT + BEST PRACTICES\n\n### 🖼️ Image order (don't swap them)\n- **Image 1** = the base shot: body, outfit, pose, scene, lighting.\n- **Image 2** = the head to put in: face, hair, eye color, nose.\n\n### ✍️ Default head-swap prompt\n```\nhead_swap: start with <image1> as the base image, keeping its lighting, environment, and background, and her outfit. remove the head from <image1> completely and replace it with the head from <image2>, strictly preserving the hair, eye color, nose structure from <image2>. copy the direction of the eye, head rotation, micro expressions from <image1>. the face stays the same size and position in the frame, skin texture and lighting on the face matching the scene, high quality, sharp details, 4k\n```\n- The `head_swap: … from <image2>.` part is the LoRA's **training caption**. Keep it word for word.\n- **Keep the expression:** leave the `copy the direction of the eye…` sentence as is.\n- **Change the expression or pose:** replace that sentence with `change the facial expression: …` and/or `change the pose: …`.\n- **Hats, glasses, earrings:** add them to the keep list (`…and her outfit, the cap on her head`), or they may be swapped away.\n- **Body traits from Image 2** (e.g. `Also give <image1> the … from <image2>`): BFS only swaps heads, so this relies on Qwen's own editing and is less reliable.\n\n### 🚫 Negative prompt\n- **Delete anything the positive asks for.** Keeping a duck face? Remove `duck face, pursed lips`. Asking for a bigger bust? Remove `excessive cleavage, altered body proportions`.\n- Never put identity words (`different face`, `altered identity`) in the negative. They fight the swap.\n\n### 📸 Choosing images\n**Image 2 (face):**\n- Large, sharp, roughly front-facing, evenly lit.\n- Nothing over the eyes or nose: no hands, hair or sunglasses.\n- Crop it to the head and shoulders. Other people or busy backgrounds can leak in.\n- Its hair comes along, so pick a hairstyle you want.\n\n**Image 1 (base):**\n- The face should be clearly visible and not tiny.\n- Similar head angle and lighting to Image 2 swap cleanest.\n- Similar hair length too: long hair outside the head area can survive the swap.\n- Avoid hands over the face. That's where BFS breaks.\n\n### ⚙️ Settings\n- **BFS LoRA strength:** 0.9 here. The model card suggests starting at 1.0.\n- **BFS version:** v1.1 = best head-angle accuracy. v1.1 *alternative* = stronger expression copy from Image 1.\n- **Size switch OFF** (match Image 1) keeps the head in the same place.\n- **Bigger output = more face detail.** Use a larger Image 1 if you can.\n- **Fixed seed** for A/B tests; change only the seed when the result is close but off.\n- **Not swapping a head** (car or outfit swap)? Set the BFS LoRA to **0**, or it may pull the head from Image 2.\n\n### ✅ Check every result\n- Hairline, neck seam, skin tone match between face and neck, leftover hair from Image 1.\n\n⚠️ Only swap faces you have the rights to: your own AI characters, or people who gave consent.\n\n"
+      },
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 224,
+      "type": "ImageCompare",
+      "pos": [
+        5533.084145642802,
+        368
+      ],
+      "size": [
+        420,
+        700
+      ],
+      "flags": {},
+      "order": 69,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image_a",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 229
+        },
+        {
+          "localized_name": "image_b",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 230
+        },
+        {
+          "localized_name": "compare_view",
+          "name": "compare_view",
+          "type": "IMAGECOMPARE",
+          "widget": {
+            "name": "compare_view"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "🔍 B · Compare: original (A) vs result (B)",
+      "properties": {
+        "Node name for S&R": "ImageCompare",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      3,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      9,
+      0,
+      10,
+      3,
+      "LATENT"
+    ],
+    [
+      9,
+      10,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      10,
+      6,
+      0,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      11,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      14,
+      0,
+      9,
+      0,
+      "INT"
+    ],
+    [
+      13,
+      14,
+      1,
+      9,
+      1,
+      "INT"
+    ],
+    [
+      16,
+      22,
+      0,
+      23,
+      0,
+      "STRING"
+    ],
+    [
+      17,
+      25,
+      0,
+      26,
+      0,
+      "STRING"
+    ],
+    [
+      18,
+      26,
+      0,
+      24,
+      0,
+      "STRING"
+    ],
+    [
+      20,
+      23,
+      0,
+      27,
+      1,
+      "STRING"
+    ],
+    [
+      21,
+      24,
+      0,
+      27,
+      0,
+      "STRING"
+    ],
+    [
+      23,
+      27,
+      0,
+      28,
+      0,
+      "STRING"
+    ],
+    [
+      24,
+      5,
+      0,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      27,
+      30,
+      0,
+      10,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      28,
+      30,
+      1,
+      10,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      29,
+      4,
+      0,
+      33,
+      0,
+      "MODEL"
+    ],
+    [
+      30,
+      33,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      25,
+      27,
+      0,
+      30,
+      2,
+      "STRING"
+    ],
+    [
+      101,
+      101,
+      0,
+      104,
+      0,
+      "MODEL"
+    ],
+    [
+      102,
+      104,
+      0,
+      105,
+      0,
+      "MODEL"
+    ],
+    [
+      103,
+      105,
+      0,
+      106,
+      0,
+      "MODEL"
+    ],
+    [
+      104,
+      106,
+      0,
+      107,
+      0,
+      "MODEL"
+    ],
+    [
+      105,
+      107,
+      0,
+      108,
+      0,
+      "MODEL"
+    ],
+    [
+      112,
+      110,
+      0,
+      120,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      113,
+      110,
+      1,
+      120,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      114,
+      110,
+      2,
+      117,
+      0,
+      "LATENT"
+    ],
+    [
+      115,
+      115,
+      0,
+      116,
+      0,
+      "INT"
+    ],
+    [
+      116,
+      115,
+      1,
+      116,
+      1,
+      "INT"
+    ],
+    [
+      117,
+      116,
+      0,
+      117,
+      1,
+      "LATENT"
+    ],
+    [
+      118,
+      117,
+      0,
+      120,
+      3,
+      "LATENT"
+    ],
+    [
+      119,
+      120,
+      0,
+      130,
+      0,
+      "LATENT"
+    ],
+    [
+      120,
+      103,
+      0,
+      130,
+      1,
+      "VAE"
+    ],
+    [
+      121,
+      130,
+      0,
+      131,
+      0,
+      "IMAGE"
+    ],
+    [
+      122,
+      108,
+      0,
+      141,
+      0,
+      "MODEL"
+    ],
+    [
+      123,
+      141,
+      0,
+      120,
+      0,
+      "MODEL"
+    ],
+    [
+      225,
+      31,
+      0,
+      34,
+      1,
+      "IMAGE"
+    ],
+    [
+      226,
+      34,
+      0,
+      30,
+      1,
+      "IMAGE"
+    ],
+    [
+      229,
+      111,
+      0,
+      224,
+      0,
+      "IMAGE"
+    ],
+    [
+      230,
+      131,
+      0,
+      224,
+      1,
+      "IMAGE"
+    ],
+    [
+      14,
+      20,
+      0,
+      22,
+      1,
+      "STRING"
+    ],
+    [
+      19,
+      21,
+      0,
+      24,
+      2,
+      "STRING"
+    ],
+    [
+      15,
+      20,
+      0,
+      25,
+      1,
+      "STRING"
+    ],
+    [
+      107,
+      102,
+      0,
+      110,
+      0,
+      "CLIP"
+    ],
+    [
+      109,
+      111,
+      0,
+      110,
+      1,
+      "IMAGE"
+    ],
+    [
+      110,
+      112,
+      0,
+      110,
+      2,
+      "IMAGE"
+    ],
+    [
+      108,
+      103,
+      0,
+      110,
+      4,
+      "VAE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 40,
+      "title": "PIPELINE A · Kromoss iPhone generator",
+      "bounding": [
+        0,
+        208,
+        2667.220278455302,
+        3338
+      ],
+      "color": "#2e4d3a",
+      "flags": {}
+    },
+    {
+      "id": 41,
+      "title": "PIPELINE B · Qwen 2.1 BFS head swap + new pose / expression",
+      "bounding": [
+        2715.220278455302,
+        208,
+        4349.8638671875,
+        1605.90625
+      ],
+      "color": "#5a2e4d",
+      "flags": {}
+    },
+    {
+      "id": 1,
+      "title": "📖 READ ME FIRST",
+      "bounding": [
+        24,
+        292,
+        1191.220278455302,
+        1524.5
+      ],
+      "color": "#8A8",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "✍️ PROMPT STYLES: copy into Positive",
+      "bounding": [
+        1239.220278455302,
+        292,
+        1252,
+        852
+      ],
+      "color": "#88A",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "① Load Models",
+      "bounding": [
+        1239.220278455302,
+        1168,
+        432,
+        454
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "② Speed + Quality",
+      "bounding": [
+        1695.220278455302,
+        1168,
+        392,
+        666
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "🖼️ Vision Encode: prompt + reference → model",
+      "bounding": [
+        2111.220278455302,
+        1168,
+        532,
+        612
+      ],
+      "color": "#b06634",
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "④ Image Size",
+      "bounding": [
+        1239.220278455302,
+        1646,
+        292,
+        414
+      ],
+      "color": "#b58b2a",
+      "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "⑤ Generate + Save",
+      "bounding": [
+        1239.220278455302,
+        2730,
+        772,
+        792
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 8,
+      "title": "③ YOUR PROMPT: flip the switch, write the middle",
+      "bounding": [
+        24,
+        1840.5,
+        1188.972265625,
+        758
+      ],
+      "color": "#8A8",
+      "flags": {}
+    },
+    {
+      "id": 9,
+      "title": "🔧 Prompt Builder: adds opener + beauty clause + closing block (no need to touch)",
+      "bounding": [
+        1239.220278455302,
+        2084,
+        1372,
+        622
+      ],
+      "color": "#444",
+      "flags": {}
+    },
+    {
+      "id": 10,
+      "title": "🖼️ REFERENCE IMAGE (optional, highly recommended): the switch turns it on or off",
+      "bounding": [
+        24,
+        2622.5,
+        1039.8169921875,
+        798
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 11,
+      "title": "👁️ LIVE PREVIEW: ✕ next to Run cancels",
+      "bounding": [
+        2035.220278455302,
+        2730,
+        432,
+        792
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 21,
+      "title": "Models",
+      "bounding": [
+        2739.220278455302,
+        292,
+        1172,
+        486
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 22,
+      "title": "Image 1 · base photo",
+      "bounding": [
+        2739.220278455302,
+        802,
+        412,
+        562
+      ],
+      "color": "#8A8",
+      "flags": {}
+    },
+    {
+      "id": 23,
+      "title": "Image 2 · face / head source",
+      "bounding": [
+        3175.220278455302,
+        802,
+        412,
+        562
+      ],
+      "color": "#8A8",
+      "flags": {}
+    },
+    {
+      "id": 24,
+      "title": "Image 3 · spare (unwired)",
+      "bounding": [
+        3611.220278455302,
+        802,
+        412,
+        562
+      ],
+      "color": "#8A8",
+      "flags": {}
+    },
+    {
+      "id": 25,
+      "title": "Prompt",
+      "bounding": [
+        4047.220278455302,
+        292,
+        552,
+        852
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    },
+    {
+      "id": 26,
+      "title": "Size",
+      "bounding": [
+        4623.220278455302,
+        292,
+        429.86386718749964,
+        638
+      ],
+      "color": "#b58b2a",
+      "flags": {}
+    },
+    {
+      "id": 27,
+      "title": "Sampler",
+      "bounding": [
+        4623.220278455302,
+        954,
+        412,
+        432
+      ],
+      "color": "#88A",
+      "flags": {}
+    },
+    {
+      "id": 28,
+      "title": "Output · Save + 🔍 Compare",
+      "bounding": [
+        5077.084145642802,
+        292,
+        892,
+        896
+      ],
+      "color": "#444",
+      "flags": {}
+    },
+    {
+      "id": 29,
+      "title": "👁️ B LIVE PREVIEW (Qwen 2.1 tiny VAE)",
+      "bounding": [
+        5993.084145642802,
+        292,
+        432,
+        792
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 58,
+      "title": "📝 B notes: how to use + head swap",
+      "bounding": [
+        6449.084145642802,
+        292,
+        592,
+        1497.90625
+      ],
+      "color": "#444",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.22,
+      "offset": [
+        80,
+        40
+      ]
+    },
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "frontendVersion": "1.57.1",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "extensions": {
+    "seed_widgets": {
+      "10": 0,
+      "120": 0,
+      "209": 0
+    }
+  },
+  "version": 0.4
+}
