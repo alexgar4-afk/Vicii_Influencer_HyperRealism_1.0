@@ -1,5 +1,5 @@
 {
-  "workflow": "Vicii_Influencer_Hyperrealism_v02.json",
+  "workflow": "Vicii_Influencer_Hyperrealism_1.0.json",
   "custom_nodes": [
     {
       "name": "ComfyUI-Spectrum-MOSS",

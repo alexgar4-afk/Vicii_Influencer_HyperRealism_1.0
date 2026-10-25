@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Influencer Hyperrealism Guide</title>
-<meta name="description" content="Visual guide to Vicii Influencer Hyperrealism v02: two switchable pipelines for generating and editing iPhone-style photos in ComfyUI.">
+<meta name="description" content="Visual guide to Vicii Influencer Hyperrealism 1.0: two switchable pipelines for generating and editing iPhone-style photos in ComfyUI.">
 <style>
   :root {
     --bg: #f6f5f1; --surface: #ffffff; --ink: #1c1c1e; --muted: #5d6168; --line: #e2dfd8; --code: #f0eee8;
@@ -137,6 +137,11 @@
   .swap .op { display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; color: var(--p); }
   .shot.r45 { aspect-ratio: 1017 / 1272; }
   .shot.ref { aspect-ratio: 1079 / 1359; }
+  .shot.lp { aspect-ratio: 432 / 768; }
+  .canvas { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--code); }
+  .canvas img { width: 100%; height: auto; display: block; }
+  .lp-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 760px) { .lp-grid { grid-template-columns: minmax(0, 1fr); } .lp-grid figure { max-width: 300px; } }
   .from { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
   .from .card h3 { display: flex; align-items: center; gap: 8px; }
   .warn-word { background: var(--warn-soft); box-shadow: inset 0 -2px 0 var(--warn); border-radius: 4px; padding: 1px 2px; color: var(--ink); }
@@ -168,7 +173,7 @@
 
 <header>
   <div class="eyebrow">ComfyUI workflow guide</div>
-  <h1>Vicii Influencer Hyperrealism · v02</h1>
+  <h1>Vicii Influencer Hyperrealism · 1.0</h1>
   <p class="lede">One workflow, two pipelines you switch on and off: <b>generate</b> a realistic iPhone-style photo, then <b>change its pose and expression</b>.</p>
   <div class="chips">
     <span class="chip A"><span class="dot"></span>A · Kromoss generator</span>
@@ -179,7 +184,7 @@
 <!-- BIG PICTURE -->
 <section id="overview">
   <h2>The big picture</h2>
-  <p class="muted">Each lane is one pipeline. Files: <code>Vicii_Influencer_Hyperrealism_v02.json</code> on the canvas, results in <code>output/</code>.</p>
+  <p class="muted">Each lane is one pipeline. Files: <code>Vicii_Influencer_Hyperrealism_1.0.json</code> on the canvas, results in <code>output/</code>.</p>
 
   <div class="card">
     <div class="lane A">
@@ -358,6 +363,43 @@
   <p class="muted" style="margin-top:12px">This output is the photo used as Image 1 in Pipeline B's examples below.</p>
 </section>
 
+<!-- PIPELINE A ON THE CANVAS -->
+<section id="a-canvas" class="A">
+  <div class="phead"><span class="tag">A</span><h2>Pipeline A in action</h2></div>
+  <figure>
+    <a class="canvas" href="Example%20Images/Screenshots/pipeline-a-canvas.webp" target="_blank" rel="noopener"><img src="Example%20Images/Screenshots/pipeline-a-canvas.webp" alt="Pipeline A on the ComfyUI canvas: the prompt box, the reference photo, the Prompt Builder, the KSampler, the saved 1088 × 1920 image and the live preview" loading="lazy"></a>
+    <figcaption>A run with a reference photo: the ✏️ box holds only <code>wearing a camo cap , doing the middle finger</code>, the 🖼️ REFERENCE switch is on with a ramen-restaurant photo, and STYLE is on (📱 Modern). The 🔧 Prompt Builder (top right) wraps the text in the opener and closing block, the KSampler runs 50 steps at CFG 3, and Save Image shows the 1088 × 1920 result next to the 👁️ live preview. Click to open full size.</figcaption>
+  </figure>
+</section>
+
+<!-- PREVIEW -->
+<section id="preview">
+  <h2>👁️ Spot a bad run early and cancel it</h2>
+  <p class="lede">Every pipeline has a <b>LIVE PREVIEW</b> group with KJNodes' <b>Model Preview Override</b>. It shows the image <i>while</i> it's being generated, not only at the end.</p>
+  <div class="lp-grid">
+    <figure>
+      <a class="shot lp" href="Example%20Images/Screenshots/live-preview.png" target="_blank" rel="noopener"><img src="Example%20Images/Screenshots/live-preview.png" alt="Model Preview Override at step 5 of 50: still blurry, but the pose, framing, cap and setting are already readable" loading="lazy"></a>
+      <figcaption><b>Step 5 of 50</b> · about 10 s into sampling, ~96 s to go</figcaption>
+    </figure>
+    <div>
+      <div class="card">
+        <h3>Why it matters</h3>
+        <ul class="tight">
+          <li><b>Don't wait for a render you'll throw away.</b> At step 5 the picture is still a blur, but the pose, the framing, the cap and the setting already read.</li>
+          <li><b>Cancel the moment something's off:</b> a wrong pose, a bad crop, a prop leaking in from the reference. Press <b>✕</b> next to Run, fix the prompt or seed, and go again.</li>
+          <li><b>It adds up.</b> Here cancelling would save the ~96 s the node estimates are left. Over a session of tries, that's a lot of waiting saved.</li>
+          <li>By about 30% of the steps the face is readable too.</li>
+        </ul>
+      </div>
+      <p class="muted" style="margin-top:12px">The strip under the preview shows the step, the seconds per step and the time left, plus the noise curve and the time each step took.</p>
+      <div class="grid2">
+        <div class="card A"><h3><span class="tag">A</span> &nbsp;FLUX.2 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = TAE_Flux2_AcademiaSD</p></div>
+        <div class="card B"><h3><span class="tag">B</span> &nbsp;Qwen 2.1 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = <b>none</b> on purpose: ComfyUI loads <code>taeqi2_1_decoder.pth</code> itself. Needs preview method <b>TAESD</b>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PIPELINE B -->
 <section id="b" class="B">
   <div class="phead"><span class="tag">B</span><h2>Change the pose and expression</h2></div>
@@ -464,6 +506,12 @@
     </div>
   </div>
 
+  <h3 style="margin-top:28px">Pipeline B in action: a head swap on the canvas</h3>
+  <figure>
+    <a class="canvas" href="Example%20Images/Screenshots/pipeline-b-canvas.webp" target="_blank" rel="noopener"><img src="Example%20Images/Screenshots/pipeline-b-canvas.webp" alt="Pipeline B on the ComfyUI canvas: models, Image 1 base photo, Image 2 face, the head-swap prompt, size, sampler, the saved result, the compare slider and the live preview" loading="lazy"></a>
+    <figcaption>Left to right: the <b>Models</b> group (Qwen Image 2.1 INT8, the Qwen3-VL text encoder, the BFS head LoRA at 0.9 and the 8-step LoRA), then <b>Image 1</b> (the photo to keep: pose, outfit, car, street), <b>Image 2</b> (the new face) and <b>Image 3</b> (bypassed). Then the <b>Prompt</b> with the BFS caption, <b>Size</b> (switch off, so the result matches Image 1 at 1088 × 1920), the <b>Sampler</b> (20 steps, CFG 3, seed 43), the saved result, <b>🔍 Compare</b> (drag to flip between Image 1 and the swap) and B's <b>👁️ live preview</b>. Click to open full size.</figcaption>
+  </figure>
+
   <h3 style="margin-top:28px">Do it yourself</h3>
   <div class="card">
     <ol class="steps">
@@ -476,16 +524,6 @@
     </ol>
   </div>
   <p class="muted" style="margin-top:12px">Only swap faces you have the rights to: your own AI characters, or people who gave consent. Never public figures.</p>
-</section>
-
-<!-- PREVIEW -->
-<section id="preview">
-  <h2>👁️ Watch it render, cancel early</h2>
-  <p class="lede">Every pipeline has a <b>LIVE PREVIEW</b> group (KJNodes Model Preview Override). By about 30% of the steps, face, pose and framing are readable; press <b>✕</b> next to Run if it's going wrong.</p>
-  <div class="grid2">
-    <div class="card A"><h3><span class="tag">A</span> &nbsp;FLUX.2 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = TAE_Flux2_AcademiaSD</p></div>
-    <div class="card B"><h3><span class="tag">B</span> &nbsp;Qwen 2.1 tiny VAE</h3><p class="muted" style="margin:0"><code>tiny_vae</code> = <b>none</b> on purpose: ComfyUI loads <code>taeqi2_1_decoder.pth</code> itself. Needs preview method <b>TAESD</b>.</p></div>
-  </div>
 </section>
 
 <!-- CAROUSEL RECIPE -->
@@ -544,7 +582,7 @@
 </section>
 
 <footer>
-  Vicii Influencer Hyperrealism v02 · <code>Vicii_Influencer_Hyperrealism_v02.json</code> · Example images in <code>Example Images/</code> were made with this workflow.
+  Vicii Influencer Hyperrealism 1.0 · <code>Vicii_Influencer_Hyperrealism_1.0.json</code> · Example images in <code>Example Images/</code> were made with this workflow.
 </footer>
 
 </div>

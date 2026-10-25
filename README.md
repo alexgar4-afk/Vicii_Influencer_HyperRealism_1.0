@@ -11,7 +11,7 @@ Realistic, unedited-looking **iPhone-style photos** in ComfyUI, plus a **pose/ex
 
 | File | What it is |
 |---|---|
-| `Vicii_Influencer_Hyperrealism_v02.json` | The ComfyUI workflow (pipelines A and B). Drag it onto the ComfyUI canvas. |
+| `Vicii_Influencer_Hyperrealism_1.0.json` | The ComfyUI workflow (pipelines A and B). Drag it onto the ComfyUI canvas. |
 | `install.bat` / `install.py` | Installer: checks for every custom node and model the workflow uses and installs the missing ones. |
 | `install_manifest.json` | The list of node packs and models the installer checks (with download links and sizes). |
 | `Workflow_Guide.html` | Visual guide to the whole workflow with example images. Open it in any browser; keep it next to `Example Images/`. |
@@ -93,7 +93,7 @@ Install them with *ComfyUI Manager → Install via Git URL*, or `git clone` them
 
 ### ▶️ Load and run
 
-1. Restart ComfyUI and drag `Vicii_Influencer_Hyperrealism_v02.json` onto the canvas.
+1. Restart ComfyUI and drag `Vicii_Influencer_Hyperrealism_1.0.json` onto the canvas.
 2. If a loader shows red, click it and select the file you downloaded.
 3. Set the **🎛️ PIPELINE TOGGLES** panel (top-left) for what you want to do (see below), then press **Run** (Ctrl+Enter).
 
@@ -137,6 +137,25 @@ The full closing blocks and examples are in the two style notes inside the workf
 
 The reference is strong: in testing, a bedroom-selfie reference carried its outfit, hair color, jewelry and even background props past a beach prompt. Crop it tight on the person if you only want the look. `image_weight` 0.25–0.5 only softens it a little.
 
+### 📸 Pipeline A in action
+
+![Pipeline A on the ComfyUI canvas: the prompt box, the reference photo, the Prompt Builder, the KSampler, the saved 1088 × 1920 image and the live preview](Example%20Images/Screenshots/pipeline-a-canvas.webp)
+
+A run with a reference photo: the ✏️ box holds only `wearing a camo cap , doing the middle finger`, the 🖼️ REFERENCE switch is on with a ramen-restaurant photo, and STYLE is on (📱 Modern). The 🔧 Prompt Builder (top right) wraps the text in the opener and closing block, the KSampler runs 50 steps at CFG 3, and Save Image shows the 1088 × 1920 result next to the 👁️ live preview.
+
+## 👁️ Live preview: spot a bad run early and cancel it
+
+<img src="Example%20Images/Screenshots/live-preview.png" width="320" alt="Model Preview Override at step 5 of 50: still blurry, but the pose, framing, cap and setting are already readable">
+
+Every pipeline has a **👁️ LIVE PREVIEW** group with **Model Preview Override** (KJNodes). It shows the image *while* it's being generated, not only at the end.
+
+**Why it matters:** you don't have to wait for a render you're going to throw away. In the screenshot the run is at step 5 of 50, about 10 seconds into sampling, and the node estimates ~96 s to go. The picture is still a blur, but the pose, the framing, the cap and the setting already read. If something's off (wrong pose, bad crop, a prop leaking in from the reference), press **✕** next to **Run** to cancel, fix the prompt or seed, and go again. Over a session of tries that's a lot of waiting saved. By about 30% of the steps the face is readable too.
+
+The strip under the preview shows the step, the seconds per step and the time left, plus the noise curve and the time each step took.
+
+- **A** decodes the preview with `TAE_Flux2_AcademiaSD.safetensors`, set in the node's `tiny_vae`.
+- **B** keeps `tiny_vae` on **none** on purpose. ComfyUI's own previewer loads `taeqi2_1_decoder.pth` from `models/vae_approx/`; KJ's `tiny_vae` slot can't load that file. This needs ComfyUI's live preview method set to **TAESD** (Settings → search "preview method"). Otherwise B's preview shows blurry color blobs.
+
 ## 🅱️ Pipeline B · Change pose + expression
 
 1. **Image 1 · base photo:** the photo to edit. Its body, scene, lighting and outfit carry over.
@@ -164,12 +183,11 @@ Tips:
 - **Image 3** is unwired on purpose: BFS is a 2-image LoRA, and the pipeline switch would otherwise turn it back on.
 - B's output is a little softer than the source photo.
 
-## 👁️ Live preview
+### 📸 Pipeline B in action: a head swap
 
-Every pipeline has a **👁️ LIVE PREVIEW** group with **Model Preview Override** (KJNodes). By about 30% of the steps the face, pose and framing are readable. If something looks wrong, press **✕** next to **Run** to cancel.
+![Pipeline B on the ComfyUI canvas: models, Image 1 base photo, Image 2 face, the head-swap prompt, size, sampler, the saved result, the compare slider and the live preview](Example%20Images/Screenshots/pipeline-b-canvas.webp)
 
-- **A** decodes the preview with `TAE_Flux2_AcademiaSD.safetensors`, set in the node's `tiny_vae`.
-- **B** keeps `tiny_vae` on **none** on purpose. ComfyUI's own previewer loads `taeqi2_1_decoder.pth` from `models/vae_approx/`; KJ's `tiny_vae` slot can't load that file. This needs ComfyUI's live preview method set to **TAESD** (Settings → search "preview method"). Otherwise B's preview shows blurry color blobs.
+Left to right: the **Models** group (Qwen Image 2.1 INT8, the Qwen3-VL text encoder, the BFS head LoRA at 0.9 and the 8-step LoRA), then **Image 1** (the photo to keep: pose, outfit, car, street), **Image 2** (the new face) and **Image 3** (bypassed). Then the **Prompt** with the BFS caption, **Size** (switch off, so the result matches Image 1 at 1088 × 1920), the **Sampler** (20 steps, CFG 3, seed 43), the saved result, **🔍 Compare** (drag to flip between Image 1 and the swap) and **👁️ B's live preview**.
 
 ## ⚙️ Settings: what to touch and what not to
 
