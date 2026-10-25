@@ -1,4 +1,4 @@
-# Vicii Influencer Hyperrealism v02
+# Vicii Influencer Hyperrealism 1.0
 
 Realistic, unedited-looking **iPhone-style photos** in ComfyUI, plus a **pose/expression editor**, all in one workflow with an on/off switch per pipeline.
 
