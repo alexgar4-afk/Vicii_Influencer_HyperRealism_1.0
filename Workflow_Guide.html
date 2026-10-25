@@ -136,6 +136,7 @@
   .swap { display: grid; grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); align-items: center; gap: 4px; }
   .swap .op { display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; color: var(--p); }
   .shot.r45 { aspect-ratio: 1017 / 1272; }
+  .shot.ref { aspect-ratio: 1079 / 1359; }
   .from { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
   .from .card h3 { display: flex; align-items: center; gap: 8px; }
   .warn-word { background: var(--warn-soft); box-shadow: inset 0 -2px 0 var(--warn); border-radius: 4px; padding: 1px 2px; color: var(--ink); }
@@ -250,7 +251,7 @@
         <li>Pick a size in <b>Resolution Selector</b> and run. About 80 s per image on an RTX 3090.</li>
       </ol>
       <div class="grid2" style="margin-top:12px">
-        <div class="card" style="border:2px solid var(--a)"><h3>🖼️ Reference ON <span class="muted" style="font-weight:400">· recommended</span></h3><p class="muted" style="margin:0">The photo's outfit, hair, jewelry, light and setting are encoded <b>straight into the conditioning</b> by Qwen3.5's vision tower. You don't need an LLM to extract a prompt first. Write only what should change: <code>wearing a camo cap, doing the middle finger</code>.</p></div>
+        <div class="card" style="border:2px solid var(--a)"><h3>🖼️ Reference ON <span class="muted" style="font-weight:400">· recommended</span></h3><p class="muted" style="margin:0">The photo's outfit, hair, jewelry, light and setting are encoded <b>straight into the conditioning</b> by Qwen3.5's vision tower. You don't need an LLM to extract a prompt first. Write only what should change: <code>wearing a camo cap, doing the middle finger</code>. <a href="#reference">See how it works ↓</a></p></div>
         <div class="card"><h3>⬜ Reference OFF</h3><p class="muted" style="margin:0">Text only, nothing from a photo. Write a <b>full, detailed prompt</b>: hair, face, body, outfit, pose, setting, lighting, framing. A short prompt here gives a generic result.</p></div>
       </div>
     </div>
@@ -268,6 +269,93 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- REFERENCE ENCODING -->
+<section id="reference" class="A">
+  <div class="phead"><span class="tag">A</span><h2>How the reference photo steers the image</h2></div>
+  <p class="lede">The <b>🖼️ Vision Encode</b> node shows the reference photo to Qwen3.5-9B, the same model that reads your text. Its vision tower turns the photo into image tokens placed right before your words, so Kromoss gets one conditioning that holds both. No pixels from the photo are reused: Kromoss draws a brand-new photo from noise.</p>
+
+  <div class="card">
+    <div class="lane A">
+      <div class="stack">
+        <div class="box">Reference photo<small>shrunk to 1 MP max (vision_megapixels)</small></div>
+        <div class="box">Your text<small>wrapped by the 🔧 Prompt Builder</small></div>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box proc"><b>Qwen3.5-9B: vision tower + text encoder</b><small>image tokens + your words → one conditioning · no VAE, no reference latent</small></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="box out">Kromoss draws a new photo<small>empty latent · denoise 1.0 · 50 steps</small></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Same scene, new photo</h3>
+  <p class="muted">Reference ON. The only text in the ✏️ box: <code>wearing a camo cap , doing the middle finger</code>.</p>
+  <div class="pair">
+    <figure>
+      <a class="shot ref" href="Example%20Images/ref-image-encoding/original_image.png" target="_blank" rel="noopener"><img src="Example%20Images/ref-image-encoding/original_image.png" alt="Reference photo: a woman in a gray cap and black puffer jacket eating ramen under yellow lanterns and red neon at night" loading="lazy"></a>
+      <figcaption><b>Reference photo</b> · loaded into 🖼️ REFERENCE IMAGE</figcaption>
+    </figure>
+    <div class="mid" aria-hidden="true">→</div>
+    <figure>
+      <a class="shot" href="Example%20Images/ref-image-encoding/moss_generation.png" target="_blank" rel="noopener"><img src="Example%20Images/ref-image-encoding/moss_generation.png" alt="Pipeline A output: a similar woman in a camo cap and puffer jacket at a ramen restaurant with yellow lanterns, pouting and giving the middle finger" loading="lazy"></a>
+      <figcaption><b>Pipeline A output</b> · 9:16, 1088 × 1920</figcaption>
+    </figure>
+  </div>
+
+  <div class="from">
+    <div class="card"><h3>🖼️ Read from the reference</h3>
+      <ul class="tight">
+        <li>The place: a ramen restaurant with yellow paper lanterns and red neon</li>
+        <li>The table: red-and-white bowl, noodles lifted on chopsticks, manga placemat, glasses and a drink</li>
+        <li>The outfit: black puffer jacket, dark top with a cross motif, a cap</li>
+        <li>The jewelry: layered chains with a red heart pendant, rings</li>
+        <li>The look: long dark hair and the pout</li>
+      </ul>
+    </div>
+    <div class="card"><h3>✏️ Changed by your text</h3>
+      <ul class="tight">
+        <li><b>"wearing a camo cap"</b>: the gray cap became camo.</li>
+        <li><b>"doing the middle finger"</b>: the raised hand now gives the finger.</li>
+      </ul>
+      <h3 style="margin-top:14px">🎨 Redrawn, not copied</h3>
+      <ul class="tight">
+        <li>Her face: a similar look, not the same person.</li>
+        <li>The signs, lanterns and room: the same kind of place, different details.</li>
+        <li>The light: night became day. If the light matters, say it in your text.</li>
+        <li>The framing: 9:16 from Resolution Selector, not the reference's 4:5.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">What Kromoss received</h3>
+  <p class="muted">The photo's image tokens come first, then the 🔧 Prompt Builder's 📱 Modern opener, your text and the closing block.</p>
+  <div class="prompt mono"><span class="lock">‹reference photo›</span> <span class="lock">modern sharp iPhone 16 Pro main camera photo of a 22-year-old very attractive influencer girl with a slim hourglass shape</span> <span class="edit">wearing a camo cap , doing the middle finger</span> <span class="lock">The image has the crisp but natural look of a modern iPhone photo: Smart HDR balancing bright highlights and shadowed faces, Photographic Styles warmth, slightly over-sharpened fine detail, natural skin texture with visible pores and faint freckles, accurate colors, mild noise in the shadows, shallow natural depth from the main lens iPhone portrait mode.</span></div>
+  <div class="legend"><span><i style="background:var(--code);border:1px solid var(--line)"></i>added for you</span><span><i style="background:var(--a-soft);box-shadow:inset 0 -2px 0 var(--a)"></i>what you typed</span></div>
+
+  <div class="grid2" style="margin-top:20px;align-items:start">
+    <div class="card">
+      <h3>Settings for this example</h3>
+      <dl class="kv">
+        <dt>Reference</dt><dd>Switch ON · image_weight 1.0 · vision_megapixels 1.0</dd>
+        <dt>Style</dt><dd>📱 Modern iPhone</dd>
+        <dt>Size</dt><dd>9:16 at 2 MP (1088 × 1920)</dd>
+        <dt>Sampler</dt><dd>50 steps · CFG 3 · dpmpp_2m_sde / sgm_uniform</dd>
+        <dt>Speed</dt><dd>Spectrum + Skip Layer Guidance (layer 22)</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>Getting the most out of it</h3>
+      <ul class="tight">
+        <li><b>It's strong.</b> Outfit, hair, jewelry and even background props carry over and beat text that disagrees. Write only what should change.</li>
+        <li><b>Crop the reference</b> tight on the person if you want her look but not the room.</li>
+        <li><b>image_weight is a weak dial.</b> It fades the photo toward gray before the encoder, and at 0.25 the outfit still came through. Use the 🖼️ REFERENCE switch to turn it off.</li>
+        <li><b>Keep the KSampler's negative wired to Vision Encode</b> and its <code>negative_prompt</code> empty. That negative carries the photo too; in testing, a plain empty negative made CFG 3 copy the reference even harder.</li>
+        <li><b>Use the W4A8 text encoder</b> from the downloads: it includes the vision tower. FP8 text encoders can't run the vision path.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:12px">This output is the photo used as Image 1 in Pipeline B's examples below.</p>
 </section>
 
 <!-- PIPELINE B -->
